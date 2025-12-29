@@ -1,0 +1,72 @@
+{
+  "id": "armstrong",
+  "name": "Armstrong Knight",
+  "type": "individual",
+  "version": "1.0.0",
+  "description": "Personal brand profile for Armstrong Knight",
+
+  "colors": {
+    "primary": "#ff6b00",
+    "secondary": "#0066cc",
+    "tertiary": "#00cc66",
+    "accent": "#cc00ff",
+    "background": "#0f0f0f",
+    "text": "#f5f5f5",
+    "textSecondary": "#b0b0b0"
+  },
+
+  "gradients": {
+    "signature": {
+      "type": "linear",
+      "angle": 45,
+      "stops": [
+        { "color": "#ff6b00", "position": 0 },
+        { "color": "#0066cc", "position": 100 }
+      ]
+    }
+  },
+
+  "fonts": {
+    "primary": "Inter",
+    "display": "Montserrat",
+    "heading": {
+      "family": "Montserrat",
+      "weight": 800,
+      "lineHeight": 1.1
+    },
+    "body": {
+      "family": "Inter",
+      "weight": 500,
+      "lineHeight": 1.6
+    }
+  },
+
+  "typography": {
+    "scale": {
+      "base": "1rem",
+      "lg": "1.25rem",
+      "xl": "1.5rem",
+      "2xl": "2rem",
+      "3xl": "2.5rem"
+    }
+  },
+
+  "animations": {
+    "default": "slideIn",
+    "preferred": ["slideIn", "zoom", "pulse"]
+  },
+
+  "emergence": {
+    "defaultScene": "minimal",
+    "brandTone": "bold",
+    "brandValues": ["innovation", "directness", "technical", "leadership"]
+  },
+
+  "metadata": {
+    "author": "Armstrong Knight",
+    "created": "2025-01-25",
+    "updated": "2025-01-25",
+    "version": "1.0.0",
+    "tags": ["personal", "executive", "tech", "leadership"]
+  }
+}
