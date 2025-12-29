@@ -1,0 +1,108 @@
+{
+  "id": "corporate",
+  "name": "Corporate",
+  "description": "Professional corporate scene with gradient background and structured layout",
+  "version": "1.0.0",
+
+  "layout": {
+    "type": "centered",
+    "alignment": "center",
+    "distribution": "vertical",
+    "spacing": "lg"
+  },
+
+  "elements": [
+    {
+      "type": "text",
+      "id": "headline",
+      "position": {
+        "x": "50%",
+        "y": "45%",
+        "anchor": "center"
+      },
+      "typography": {
+        "align": "center",
+        "size": "3xl",
+        "weight": 700,
+        "family": "display"
+      }
+    },
+    {
+      "type": "decoration",
+      "id": "accent-line",
+      "shape": "line",
+      "position": {
+        "x": "50%",
+        "y": "55%",
+        "anchor": "center"
+      },
+      "dimensions": {
+        "width": "200px",
+        "height": "4px"
+      },
+      "style": {
+        "color": "primary",
+        "opacity": 0.8
+      }
+    }
+  ],
+
+  "background": {
+    "type": "gradient",
+    "gradient": "primary",
+    "overlay": {
+      "type": "texture",
+      "pattern": "grid",
+      "opacity": 0.05
+    }
+  },
+
+  "decorations": [
+    {
+      "type": "geometric",
+      "shape": "circle",
+      "position": "top-right",
+      "size": "large",
+      "opacity": 0.1,
+      "blur": "md"
+    },
+    {
+      "type": "geometric",
+      "shape": "square",
+      "position": "bottom-left",
+      "size": "medium",
+      "opacity": 0.08,
+      "blur": "lg"
+    }
+  ],
+
+  "animation": {
+    "default": "fadeIn",
+    "elements": {
+      "headline": {
+        "type": "slideIn",
+        "direction": "bottom",
+        "delay": "0.2s"
+      },
+      "accent-line": {
+        "type": "scaleX",
+        "from": 0,
+        "to": 1,
+        "delay": "0.5s"
+      }
+    }
+  },
+
+  "constraints": {
+    "minElements": 1,
+    "maxElements": 5,
+    "textRequired": true,
+    "brandRequired": true
+  },
+
+  "metadata": {
+    "category": "professional",
+    "complexity": "medium",
+    "tags": ["corporate", "professional", "gradient", "structured", "brand"]
+  }
+}
