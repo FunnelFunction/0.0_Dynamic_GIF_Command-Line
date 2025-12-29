@@ -1,0 +1,8 @@
+services:
+  - type: static
+    name: render-auto-gif
+    repo: https://github.com/FunnelFunction/0.0_Dynamic_GIF_Command-Line
+    branch: main
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars: []
