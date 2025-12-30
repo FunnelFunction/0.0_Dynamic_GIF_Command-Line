@@ -21,7 +21,7 @@ Built by:
 - **Grok** (xAI) - Edge case analysis, optimization
 - **Gemini** (Google) - Cross-validation, testing frameworks
 
-> *"We beat the fuck out of ARC-AGI like they never thought possible - the actual predictive nature to understand how the next few should go based on the few examples given."* — Armstrong Knight
+> *The actual predictive nature to understand how the next few should go based on the few examples given."* — Armstrong Knight
 
 This is not just a GIF tool. This is **Executable Physics** - mathematical frameworks that compile intent into visual reality.
 
