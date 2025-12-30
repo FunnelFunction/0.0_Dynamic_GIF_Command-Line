@@ -562,6 +562,49 @@
         </div>
       </div>
     </div>
+    
+    <!-- Scalar Unfurling - Advanced Decorations -->
+    <div class="example-category">
+      <h4>🔢 SCALAR UNFURLING (ITT Mathematical Patterns)</h4>
+      <p style="font-size: 0.75rem; color: #888; margin-bottom: 0.5rem; padding: 0 0.5rem;">
+        Each scalar (angle, spacing) unfurls through mathematical projection into visual reality.
+        θ → (cos θ, sin θ) → line family → pixels. Minimal input → maximum specification.
+      </p>
+      <div class="example-list">
+        <div class="example-item" data-cmd="header=Gradient Co|subheader=∇Φ Fields|content=Linear Flow~Directional Force~Vector Space|decorations=corners,diagonals|angle=30|spacing=50|backgroundColor=#0a0a1a|decorationColor=#00ffaa|timing=2s">
+          <span class="label">30° Diagonals:</span> Shallow Gradient Field
+          <div class="desc">angle=30 unfurls into southwest→northeast lines</div>
+        </div>
+        <div class="example-item" data-cmd="header=CrossField|subheader=Superposition|content=Wave 1~Wave 2~Interference|decorations=corners,crosshatch|angle=60|angle2=120|spacing=35|backgroundColor=#1a1a2e|decorationColor=#ff6b6b|timing=2s">
+          <span class="label">Crosshatch:</span> Dual Field Interference
+          <div class="desc">Two ∇Φ fields at 60° and 120° superimposed</div>
+        </div>
+        <div class="example-item" data-cmd="header=GridSpace|subheader=Cartesian Basis|content=e₁ Axis~e₂ Axis~Origin|decorations=corners,grid|spacing=30|backgroundColor=#0f0f1a|decorationColor=#4a9eff|timing=1.5s">
+          <span class="label">Grid:</span> Orthogonal Coordinate Field
+          <div class="desc">x=const ∩ y=const level sets</div>
+        </div>
+        <div class="example-item" data-cmd="header=Radial|subheader=Level Sets|content=r = 40~r = 70~r = 100|decorations=corners,rings|backgroundColor=#1a0a1a|decorationColor=#ff00ff|timing=2s">
+          <span class="label">Rings:</span> Concentric Equipotential Surfaces
+          <div class="desc">Multiple radii from single center point</div>
+        </div>
+        <div class="example-item" data-cmd="header=Starburst|subheader=Ray Field|content=θ = 0°~θ = 30°~θ = 60°~θ = 90°|decorations=corners,burst|backgroundColor=#1a1a0a|decorationColor=#ffcc00|timing=1.5s">
+          <span class="label">Burst:</span> Angular Direction Field
+          <div class="desc">12 rays emanating from center</div>
+        </div>
+        <div class="example-item" data-cmd="header=Sine|subheader=Oscillation|content=Peak~Trough~Zero Crossing|decorations=corners,wave|amplitude=30|wavelength=80|backgroundColor=#0a1a1a|decorationColor=#00ffff|timing=2s">
+          <span class="label">Wave:</span> Sinusoidal Field
+          <div class="desc">y = A·sin(kx) where k = 2π/λ</div>
+        </div>
+        <div class="example-item" data-cmd="header=Dots Array|subheader=Discrete Sampling|content=Point 1~Point 2~Point 3|decorations=corners,dots|spacing=25|backgroundColor=#1a1a1a|decorationColor=#88ff88|timing=1.5s">
+          <span class="label">Dots:</span> Lattice Point Sampling
+          <div class="desc">Φ evaluated at regular grid points</div>
+        </div>
+        <div class="example-item" data-cmd="header=Full Stack|subheader=Layer Composition|content=Background~Patterns~Shapes~Text|decorations=corners,diagonals,circles,squares|angle=45|spacing=60|backgroundColor=#0f0f2a|decorationColor=#00ff88|timing=2s">
+          <span class="label">Full Stack:</span> All Layers Combined
+          <div class="desc">Complete scalar unfurling demonstration</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Footer -->
@@ -851,36 +894,64 @@
      * ============================================
      */
     
-    // Decoration drawing functions
+    /**
+     * ============================================
+     * DECORATION SYSTEM - Scalar Field Geometry
+     * 
+     * Each decoration is a COLLAPSE PATTERN in the visual field.
+     * Following ITT: Φ → ∇Φ → ∇×F → ∇²Φ
+     * 
+     * Lines     = ∇Φ (gradient direction - linear collapse along vector)
+     * Circles   = Radial harmonic (spherical collapse from point source)
+     * Squares   = Orthogonal collapse (Cartesian basis vectors e₁, e₂)
+     * Gradients = |Φ| magnitude (field intensity visualization)
+     * Angles    = SO(2) rotation of ∇Φ through angle θ
+     * 
+     * The SCALAR UNFURLING:
+     * A parameter like `angle=45` is a single scalar.
+     * It unfurls through fiber bundle projection:
+     *   θ → (cos θ, sin θ) → parametric curve → pixel coordinates
+     * 
+     * This is the Pre-Emergent Visual Dynamics principle:
+     * Minimal input → Maximum specification through mathematical emergence
+     * ============================================
+     */
+    
     const Decorations = {
-      // Corner brackets [ ]
+      
+      /**
+       * CORNERS - Orthogonal Collapse at Boundaries
+       * Mathematical basis: L-shaped paths at canvas vertices
+       * Each corner is a ∇²Φ collapse point where field intensity peaks
+       */
       corners: (ctx, w, h, color, thickness = 2, size = 30) => {
         ctx.strokeStyle = color;
         ctx.lineWidth = thickness;
         const margin = 15;
         
-        // Top-left
+        // Four corners = four collapse vertices
+        // Top-left: origin anchor
         ctx.beginPath();
         ctx.moveTo(margin, margin + size);
         ctx.lineTo(margin, margin);
         ctx.lineTo(margin + size, margin);
         ctx.stroke();
         
-        // Top-right
+        // Top-right: x-reflection
         ctx.beginPath();
         ctx.moveTo(w - margin - size, margin);
         ctx.lineTo(w - margin, margin);
         ctx.lineTo(w - margin, margin + size);
         ctx.stroke();
         
-        // Bottom-left
+        // Bottom-left: y-reflection  
         ctx.beginPath();
         ctx.moveTo(margin, h - margin - size);
         ctx.lineTo(margin, h - margin);
         ctx.lineTo(margin + size, h - margin);
         ctx.stroke();
         
-        // Bottom-right
+        // Bottom-right: xy-reflection (point inversion)
         ctx.beginPath();
         ctx.moveTo(w - margin - size, h - margin);
         ctx.lineTo(w - margin, h - margin);
@@ -888,10 +959,45 @@
         ctx.stroke();
       },
       
-      // Outline circles
-      circles: (ctx, w, h, color, positions = ['topLeft', 'bottomRight']) => {
+      /**
+       * CIRCLES - Radial Collapse from Point Sources
+       * Mathematical basis: r = constant (level sets of radial distance)
+       * Each circle is a resonance ring - equidistant from center
+       * Parametric: x = cx + r·cos(t), y = cy + r·sin(t), t ∈ [0, 2π]
+       */
+      circles: (ctx, w, h, color, positions = ['topLeft', 'center']) => {
         ctx.strokeStyle = color;
         ctx.lineWidth = 2;
+        
+        // Position configs - each is a field source location
+        const configs = {
+          topLeft: { x: 80, y: 80, r: 40 },
+          topRight: { x: w - 80, y: 80, r: 40 },
+          bottomLeft: { x: 80, y: h - 80, r: 35 },
+          bottomRight: { x: w - 80, y: h - 80, r: 35 },
+          center: { x: w / 2, y: h / 2, r: 80 },
+          centerLarge: { x: w / 2, y: h / 2, r: 120 },
+          centerSmall: { x: w / 2, y: h / 2, r: 50 }
+        };
+        
+        positions.forEach(pos => {
+          const cfg = configs[pos];
+          if (cfg) {
+            ctx.beginPath();
+            // Full circle: t from 0 to 2π
+            ctx.arc(cfg.x, cfg.y, cfg.r, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+        });
+      },
+      
+      /**
+       * CIRCLES FILLED - Solid Radial Collapse
+       * The filled variant represents field DENSITY rather than boundary
+       */
+      circlesFilled: (ctx, w, h, color, positions = ['center'], opacity = 0.3) => {
+        ctx.fillStyle = color;
+        ctx.globalAlpha = opacity;
         
         const configs = {
           topLeft: { x: 80, y: 80, r: 40 },
@@ -907,12 +1013,34 @@
           if (cfg) {
             ctx.beginPath();
             ctx.arc(cfg.x, cfg.y, cfg.r, 0, Math.PI * 2);
-            ctx.stroke();
+            ctx.fill();
           }
         });
+        
+        ctx.globalAlpha = 1;
       },
       
-      // Filled rectangle/square
+      /**
+       * GRADIENT CIRCLES - Radial Field Intensity
+       * Mathematical basis: |Φ(r)| = Φ₀ · e^(-r²/2σ²)
+       * Gaussian falloff from center - the "glow" effect
+       */
+      gradientCircle: (ctx, w, h, colorInner, colorOuter, cx, cy, r) => {
+        const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+        gradient.addColorStop(0, colorInner);
+        gradient.addColorStop(1, colorOuter);
+        
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.fill();
+      },
+      
+      /**
+       * SQUARES - Orthogonal Basis Collapse
+       * Mathematical basis: max(|x-cx|, |y-cy|) = s (L∞ metric)
+       * The square is the unit ball in L∞ norm
+       */
       square: (ctx, w, h, color, positions = ['bottomLeft']) => {
         ctx.strokeStyle = color;
         ctx.lineWidth = 2;
@@ -932,26 +1060,258 @@
         });
       },
       
-      // Diagonal pinstripes
-      pinstripes: (ctx, w, h, color, angle = 45, spacing = 60) => {
+      /**
+       * SQUARES FILLED - Solid Orthogonal Density
+       */
+      squaresFilled: (ctx, w, h, color, positions = ['bottomLeft'], opacity = 0.3) => {
+        ctx.fillStyle = color;
+        ctx.globalAlpha = opacity;
+        
+        const configs = {
+          bottomLeft: { x: 30, y: h - 80, size: 50 },
+          bottomRight: { x: w - 80, y: h - 80, size: 50 },
+          topLeft: { x: 30, y: 30, size: 50 },
+          topRight: { x: w - 80, y: 30, size: 50 }
+        };
+        
+        positions.forEach(pos => {
+          const cfg = configs[pos];
+          if (cfg) {
+            ctx.fillRect(cfg.x, cfg.y, cfg.size, cfg.size);
+          }
+        });
+        
+        ctx.globalAlpha = 1;
+      },
+      
+      /**
+       * DIAGONAL LINES - ∇Φ Direction Field at Angle θ
+       * 
+       * THE SCALAR UNFURLING IN ACTION:
+       * Input: angle (single scalar, e.g. 45)
+       * 
+       * Step 1: θ (degrees) → θ_rad (radians)
+       * Step 2: θ_rad → (cos θ, sin θ) - unit direction vector
+       * Step 3: Direction vector → parametric line family
+       * Step 4: Line family → pixel coordinates across canvas
+       * 
+       * This is fiber bundle projection:
+       * S¹ (angle circle) → R² (canvas plane) → Z² (pixel grid)
+       * 
+       * @param {number} angle - Degrees from horizontal (45 = diagonal, 90 = vertical)
+       * @param {number} spacing - Distance between parallel lines
+       * @param {number} thickness - Line weight
+       */
+      diagonalLines: (ctx, w, h, color, angle = 45, spacing = 60, thickness = 1) => {
         ctx.strokeStyle = color;
-        ctx.lineWidth = 1;
-        ctx.globalAlpha = 0.3;
+        ctx.lineWidth = thickness;
+        ctx.globalAlpha = 0.4;
         
-        const radians = (angle * Math.PI) / 180;
-        const length = Math.sqrt(w * w + h * h);
+        // SCALAR UNFURLING: angle → radians → direction vector
+        const theta = (angle * Math.PI) / 180;
+        const dx = Math.cos(theta);  // x-component of ∇Φ
+        const dy = Math.sin(theta);  // y-component of ∇Φ
         
-        for (let i = -length; i < length * 2; i += spacing) {
+        // Perpendicular direction for line spacing
+        const px = -dy;  // perpendicular x
+        const py = dx;   // perpendicular y
+        
+        // Canvas diagonal length (maximum line extent)
+        const diagonal = Math.sqrt(w * w + h * h);
+        
+        // Number of lines needed to cover canvas
+        const numLines = Math.ceil(diagonal / spacing) * 2;
+        
+        // Draw parallel lines along ∇Φ direction
+        for (let i = -numLines; i <= numLines; i++) {
+          // Offset along perpendicular
+          const offsetX = i * spacing * px;
+          const offsetY = i * spacing * py;
+          
+          // Center point of this line
+          const cx = w / 2 + offsetX;
+          const cy = h / 2 + offsetY;
+          
+          // Line endpoints (extend beyond canvas)
+          const x1 = cx - diagonal * dx;
+          const y1 = cy - diagonal * dy;
+          const x2 = cx + diagonal * dx;
+          const y2 = cy + diagonal * dy;
+          
           ctx.beginPath();
-          ctx.moveTo(i, 0);
-          ctx.lineTo(i + Math.cos(radians) * length, Math.sin(radians) * length);
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
           ctx.stroke();
         }
         
         ctx.globalAlpha = 1;
       },
       
-      // Navigation dots
+      /**
+       * PINSTRIPES - Dense Diagonal Field (Classic Marketing Look)
+       * Same mathematics as diagonalLines but with tighter spacing
+       */
+      pinstripes: (ctx, w, h, color, angle = 45, spacing = 20) => {
+        Decorations.diagonalLines(ctx, w, h, color, angle, spacing, 1);
+      },
+      
+      /**
+       * CROSSHATCH - Superposition of Two ∇Φ Fields
+       * Mathematical basis: F = F₁ + F₂ where F₁ ⊥ F₂
+       * Creates interference pattern from orthogonal gradients
+       */
+      crosshatch: (ctx, w, h, color, angle1 = 45, angle2 = 135, spacing = 40) => {
+        Decorations.diagonalLines(ctx, w, h, color, angle1, spacing, 1);
+        Decorations.diagonalLines(ctx, w, h, color, angle2, spacing, 1);
+      },
+      
+      /**
+       * GRADIENT BAND - Horizontal Field Intensity Strip
+       * Mathematical basis: Φ(y) = linear interpolation
+       * Creates depth/atmosphere in specific zone
+       */
+      gradientBand: (ctx, w, h, color1, color2, y1, y2) => {
+        const gradient = ctx.createLinearGradient(0, y1, 0, y2);
+        gradient.addColorStop(0, color1);
+        gradient.addColorStop(1, color2);
+        
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, y1, w, y2 - y1);
+      },
+      
+      /**
+       * RADIAL BURST - Rays from Center Point
+       * Mathematical basis: θ = constant (angular sectors)
+       * Each ray is a direction of ∇Φ emanating from source
+       */
+      radialBurst: (ctx, w, h, color, cx, cy, numRays = 12, innerR = 50, outerR = 150) => {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1;
+        ctx.globalAlpha = 0.3;
+        
+        // Distribute rays evenly around circle
+        const angleStep = (2 * Math.PI) / numRays;
+        
+        for (let i = 0; i < numRays; i++) {
+          const theta = i * angleStep;
+          
+          // Ray from inner to outer radius
+          const x1 = cx + innerR * Math.cos(theta);
+          const y1 = cy + innerR * Math.sin(theta);
+          const x2 = cx + outerR * Math.cos(theta);
+          const y2 = cy + outerR * Math.sin(theta);
+          
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.stroke();
+        }
+        
+        ctx.globalAlpha = 1;
+      },
+      
+      /**
+       * CONCENTRIC RINGS - Multiple Radial Level Sets
+       * Mathematical basis: r ∈ {r₁, r₂, r₃, ...}
+       * Represents equipotential surfaces of radial field
+       */
+      concentricRings: (ctx, w, h, color, cx, cy, radii = [40, 70, 100]) => {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1;
+        ctx.globalAlpha = 0.4;
+        
+        radii.forEach(r => {
+          ctx.beginPath();
+          ctx.arc(cx, cy, r, 0, Math.PI * 2);
+          ctx.stroke();
+        });
+        
+        ctx.globalAlpha = 1;
+      },
+      
+      /**
+       * GRID - Cartesian Coordinate Field
+       * Mathematical basis: x = const and y = const level sets
+       * The orthogonal basis visualization
+       */
+      grid: (ctx, w, h, color, spacing = 40) => {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1;
+        ctx.globalAlpha = 0.15;
+        
+        // Vertical lines (x = constant)
+        for (let x = spacing; x < w; x += spacing) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, h);
+          ctx.stroke();
+        }
+        
+        // Horizontal lines (y = constant)
+        for (let y = spacing; y < h; y += spacing) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(w, y);
+          ctx.stroke();
+        }
+        
+        ctx.globalAlpha = 1;
+      },
+      
+      /**
+       * DOTS PATTERN - Discrete Field Sampling
+       * Mathematical basis: Φ sampled at regular lattice points
+       * Each dot represents field value at that location
+       */
+      dots: (ctx, w, h, color, spacing = 30, radius = 2) => {
+        ctx.fillStyle = color;
+        ctx.globalAlpha = 0.3;
+        
+        for (let x = spacing; x < w; x += spacing) {
+          for (let y = spacing; y < h; y += spacing) {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+        
+        ctx.globalAlpha = 1;
+      },
+      
+      /**
+       * TRIANGLES - Simplex Tessellation
+       * Mathematical basis: 2-simplex tiling
+       * Creates geometric pattern from triangular basis
+       */
+      triangles: (ctx, w, h, color, positions = ['bottomLeft']) => {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        
+        const size = 40;
+        const configs = {
+          bottomLeft: { x: 40, y: h - 40 },
+          bottomRight: { x: w - 40, y: h - 40 },
+          topLeft: { x: 40, y: 40 },
+          topRight: { x: w - 40, y: 40 }
+        };
+        
+        positions.forEach(pos => {
+          const cfg = configs[pos];
+          if (cfg) {
+            ctx.beginPath();
+            ctx.moveTo(cfg.x, cfg.y);
+            ctx.lineTo(cfg.x + size, cfg.y);
+            ctx.lineTo(cfg.x + size/2, cfg.y - size * 0.866);
+            ctx.closePath();
+            ctx.stroke();
+          }
+        });
+      },
+      
+      /**
+       * NAVIGATION DOTS - Frame Indicator
+       * Shows current frame position in sequence
+       */
       navDots: (ctx, w, h, color, count = 3, activeIndex = 0) => {
         const dotRadius = 4;
         const spacing = 20;
@@ -973,7 +1333,9 @@
         }
       },
       
-      // Horizontal line/divider
+      /**
+       * DIVIDER - Horizontal Separation Line
+       */
       divider: (ctx, w, y, color, width = 0.6) => {
         ctx.strokeStyle = color;
         ctx.lineWidth = 1;
@@ -983,11 +1345,107 @@
         ctx.moveTo(startX, y);
         ctx.lineTo(startX + lineWidth, y);
         ctx.stroke();
+      },
+      
+      /**
+       * WAVE - Sinusoidal Field Oscillation
+       * Mathematical basis: y = A·sin(kx + φ)
+       * Represents wave-like field pattern
+       */
+      wave: (ctx, w, h, color, amplitude = 20, wavelength = 100, yOffset = null) => {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        ctx.globalAlpha = 0.3;
+        
+        const y0 = yOffset || h / 2;
+        const k = (2 * Math.PI) / wavelength;  // wave number
+        
+        ctx.beginPath();
+        ctx.moveTo(0, y0);
+        
+        for (let x = 0; x <= w; x += 2) {
+          const y = y0 + amplitude * Math.sin(k * x);
+          ctx.lineTo(x, y);
+        }
+        
+        ctx.stroke();
+        ctx.globalAlpha = 1;
       }
     };
     
     /**
+     * ============================================
+     * SCALAR UNFURLING DOCUMENTATION
+     * ============================================
+     * 
+     * THE PHILOSOPHY OF SCALAR UNFURLING:
+     * 
+     * In Intent Tensor Theory, a "scalar" is a single number.
+     * But a single number contains INFINITE potential when
+     * projected through the right mathematical structure.
+     * 
+     * Consider: angle = 45
+     * 
+     * This one number unfurls through FOUR LEVELS:
+     * 
+     * LEVEL 0: THE SCALAR (θ = 45)
+     *   - A point on the real number line
+     *   - Dimensionality: 0D
+     *   - Information: 1 value
+     * 
+     * LEVEL 1: THE PROJECTION (θ → radians → (cos θ, sin θ))
+     *   - Scalar maps to unit circle point
+     *   - Dimensionality: 0D → 1D (S¹)
+     *   - This is the FIBER BUNDLE projection
+     *   - θ_rad = θ × π/180 = 0.785398...
+     *   - cos(45°) = 0.7071..., sin(45°) = 0.7071...
+     *   - The scalar has become a DIRECTION VECTOR
+     * 
+     * LEVEL 2: THE FIELD (direction → line family)
+     *   - One direction generates infinite parallel lines
+     *   - Dimensionality: 1D → 2D (R²)
+     *   - Each line: p(t) = p₀ + t·(cos θ, sin θ)
+     *   - Parameterized by offset distance from origin
+     *   - The direction has become a FIELD OF LINES
+     * 
+     * LEVEL 3: THE RENDERING (continuous → discrete)
+     *   - Continuous lines map to pixel coordinates
+     *   - Dimensionality: R² → Z² (integer grid)
+     *   - Anti-aliasing, clipping, rasterization
+     *   - The field has become VISUAL REALITY
+     * 
+     * TOTAL TRANSFORMATION:
+     *   45 → 0.785 → (0.707, 0.707) → ∞ lines → 640×800 pixels
+     *   1 number → ~512,000 pixel decisions
+     * 
+     * This is PRE-EMERGENT VISUAL DYNAMICS:
+     * The minimal seed (one scalar) contains the DNA
+     * for maximum visual specification.
+     * 
+     * The GENIUS of ITT is recognizing that:
+     * - Complex outputs need not require complex inputs
+     * - Mathematical structure does the heavy lifting
+     * - The scalar "knows" how to unfurl through geometry
+     * 
+     * In marketing terms: The Intent (Φ) is the scalar.
+     * The campaign creative is the unfurled visual field.
+     * f(x) = the mapping function between them.
+     * 
+     * ============================================
+     */
+    
+    /**
      * Parse zoned layout command
+     * 
+     * EXTENDED SCALAR PARAMETERS:
+     * - angle: Rotation angle for diagonal decorations (degrees)
+     * - spacing: Distance between repeated elements (pixels)
+     * - opacity: Alpha transparency (0-1)
+     * - thickness: Line weight (pixels)
+     * - radius: Circle/dot radius (pixels)
+     * 
+     * Each scalar unfurls through the decoration system
+     * into rich visual patterns.
      */
     function parseZonedCommand(cmdStr) {
       const manifest = {
@@ -1005,8 +1463,19 @@
         canvas: '4:5',  // Default to portrait for ads
         decorations: ['corners'],
         decorationColor: '#00ff00',
+        decorationColor2: '#ffffff',  // Secondary color for gradients
         timing: 2000,
         background: 'solid',  // solid, gradient
+        backgroundColor: '#1a1a1a',
+        // NEW SCALAR PARAMETERS - each one unfurls into visual structure
+        angle: 45,        // Rotation for diagonal elements (degrees)
+        angle2: 135,      // Second angle for crosshatch
+        spacing: 40,      // Distance between repeated elements
+        opacity: 0.3,     // Alpha for filled/pattern elements
+        thickness: 2,     // Line weight
+        radius: 80,       // Circle radius for centered elements
+        amplitude: 20,    // Wave amplitude
+        wavelength: 100   // Wave period
         backgroundColor: '#1a1a1a'
       };
       
@@ -1033,7 +1502,23 @@
     }
     
     /**
-     * Render a zoned frame
+     * ============================================
+     * RENDER ZONED FRAME
+     * 
+     * This is where SCALAR UNFURLING becomes VISUAL REALITY.
+     * 
+     * Each parameter in the manifest is a seed scalar.
+     * This function is the projection operator that maps:
+     *   Scalar Space → Visual Space
+     * 
+     * The rendering order is critical (back to front):
+     * 1. Background (Φ₀ - the ground state)
+     * 2. Pattern decorations (∇Φ - field directions)
+     * 3. Shape decorations (∇²Φ - collapse points)
+     * 4. Text zones (Ψ - the offer state vectors)
+     * 5. Navigation (feedback indicators)
+     * 
+     * ============================================
      */
     function renderZonedFrame(manifest, contentIndex = 0) {
       const canvasSize = CANVAS_SIZES[manifest.canvas] || CANVAS_SIZES['4:5'];
@@ -1045,7 +1530,21 @@
       // Get palette colors
       const palette = PALETTES[manifest.palette] || PALETTES.corporate;
       
-      // === BACKGROUND ===
+      // Extract scalar parameters for unfurling
+      const {
+        decorationColor: decoColor,
+        decorationColor2: decoColor2,
+        angle,
+        angle2,
+        spacing,
+        opacity,
+        thickness,
+        radius,
+        amplitude,
+        wavelength
+      } = manifest;
+      
+      // === LAYER 0: BACKGROUND (Φ₀ Ground State) ===
       if (manifest.background === 'gradient') {
         const gradient = ctx.createLinearGradient(0, 0, w, h);
         palette.gradient.forEach((color, i) => {
@@ -1057,33 +1556,104 @@
       }
       ctx.fillRect(0, 0, w, h);
       
-      // === DECORATIONS LAYER ===
-      const decoColor = manifest.decorationColor;
+      // === LAYER 1: PATTERN DECORATIONS (∇Φ Field Patterns) ===
+      // These are continuous field visualizations - drawn first (behind shapes)
       
-      if (manifest.decorations.includes('corners')) {
-        Decorations.corners(ctx, w, h, decoColor);
+      // Grid: Cartesian basis field
+      if (manifest.decorations.includes('grid')) {
+        Decorations.grid(ctx, w, h, decoColor, spacing);
       }
+      
+      // Dots: Discrete field sampling
+      if (manifest.decorations.includes('dots')) {
+        Decorations.dots(ctx, w, h, decoColor, spacing, 2);
+      }
+      
+      // Diagonal lines: ∇Φ at angle θ
+      // THE SCALAR UNFURLING: angle → direction → line family → pixels
+      if (manifest.decorations.includes('diagonals')) {
+        Decorations.diagonalLines(ctx, w, h, decoColor, angle, spacing, thickness);
+      }
+      
+      // Pinstripes: Dense diagonal field
+      if (manifest.decorations.includes('pinstripes')) {
+        Decorations.pinstripes(ctx, w, h, decoColor, angle, spacing);
+      }
+      
+      // Crosshatch: Superposition of two ∇Φ fields
+      if (manifest.decorations.includes('crosshatch')) {
+        Decorations.crosshatch(ctx, w, h, decoColor, angle, angle2, spacing);
+      }
+      
+      // Wave: Sinusoidal oscillation
+      if (manifest.decorations.includes('wave')) {
+        Decorations.wave(ctx, w, h, decoColor, amplitude, wavelength);
+      }
+      
+      // === LAYER 2: FILLED SHAPES (Field Density) ===
+      // These represent field MAGNITUDE, not boundary
+      
+      // Gradient circle at center: Radial field intensity |Φ(r)|
+      if (manifest.decorations.includes('glow')) {
+        const transparent = decoColor + '00';  // Add alpha
+        Decorations.gradientCircle(ctx, w, h, decoColor, transparent, w/2, h/2, radius);
+      }
+      
+      // Filled circles: Solid field regions
+      if (manifest.decorations.includes('circlesFilled')) {
+        Decorations.circlesFilled(ctx, w, h, decoColor, ['center'], opacity);
+      }
+      
+      // Filled squares: Orthogonal density regions
+      if (manifest.decorations.includes('squaresFilled')) {
+        Decorations.squaresFilled(ctx, w, h, decoColor, ['bottomLeft', 'bottomRight'], opacity);
+      }
+      
+      // === LAYER 3: OUTLINE SHAPES (∇²Φ Collapse Boundaries) ===
+      // These are where the field concentrates - drawn on top
+      
+      // Corner brackets: Boundary collapse at vertices
+      if (manifest.decorations.includes('corners')) {
+        Decorations.corners(ctx, w, h, decoColor, thickness);
+      }
+      
+      // Outline circles: Radial level sets
       if (manifest.decorations.includes('circles')) {
         Decorations.circles(ctx, w, h, decoColor, ['topLeft', 'center']);
       }
+      
+      // Outline squares: L∞ metric boundaries
       if (manifest.decorations.includes('squares')) {
         Decorations.square(ctx, w, h, decoColor, ['bottomLeft', 'bottomRight']);
       }
-      if (manifest.decorations.includes('pinstripes')) {
-        Decorations.pinstripes(ctx, w, h, decoColor);
+      
+      // Triangles: Simplex boundaries
+      if (manifest.decorations.includes('triangles')) {
+        Decorations.triangles(ctx, w, h, decoColor, ['bottomLeft', 'bottomRight']);
       }
       
-      // === TEXT ZONES ===
+      // Concentric rings: Multiple radial level sets
+      if (manifest.decorations.includes('rings')) {
+        Decorations.concentricRings(ctx, w, h, decoColor, w/2, h/2, [40, 70, 100, 130]);
+      }
+      
+      // Radial burst: Ray field from center
+      if (manifest.decorations.includes('burst')) {
+        Decorations.radialBurst(ctx, w, h, decoColor, w/2, h/2, 12, 50, 150);
+      }
+      
+      // === LAYER 4: TEXT ZONES (Ψ Offer State Vectors) ===
       ctx.textAlign = 'center';
       
-      // Zone Y positions (proportional)
+      // Zone Y positions (proportional to canvas height)
+      // These are the FIXED POINTS in the visual field
       const headerY = h * 0.20;
       const subheaderY = h * 0.32;
       const contentY = h * 0.48;
       const taglineY = h * 0.62;
       const footerY = h * 0.72;
       
-      // HEADER (fixed, large, bold)
+      // HEADER (fixed, large, bold) - The Brand Anchor
       if (manifest.header) {
         ctx.fillStyle = manifest.headerColor;
         ctx.font = `800 ${Math.floor(w * 0.10)}px 'SF Mono', 'Courier New', monospace`;
@@ -1095,14 +1665,15 @@
         Decorations.divider(ctx, w, headerY + 25, decoColor, 0.5);
       }
       
-      // SUBHEADER (fixed, colored, medium)
+      // SUBHEADER (fixed, colored, medium) - The Category Signal
       if (manifest.subheader) {
         ctx.fillStyle = manifest.subheaderColor;
         ctx.font = `400 ${Math.floor(w * 0.07)}px Inter, -apple-system, sans-serif`;
         ctx.fillText(manifest.subheader, w / 2, subheaderY);
       }
       
-      // CONTENT (animated zone!)
+      // CONTENT (animated zone!) - The Dynamic Attractor
+      // This is where temporal collapse happens across frames
       if (manifest.content.length > 0) {
         const currentContent = manifest.content[contentIndex % manifest.content.length];
         ctx.fillStyle = palette.text || '#ffffff';
@@ -1118,14 +1689,14 @@
         });
       }
       
-      // TAGLINE (fixed, smaller)
+      // TAGLINE (fixed, smaller) - The Value Proposition
       if (manifest.tagline) {
         ctx.fillStyle = manifest.taglineColor;
         ctx.font = `400 ${Math.floor(w * 0.04)}px Inter, -apple-system, sans-serif`;
         ctx.fillText(manifest.tagline, w / 2, taglineY);
       }
       
-      // FOOTER (fixed, small, muted)
+      // FOOTER (fixed, small, muted) - The Trust Anchor
       if (manifest.footer) {
         ctx.fillStyle = manifest.footerColor;
         ctx.font = `400 ${Math.floor(w * 0.035)}px Inter, -apple-system, sans-serif`;
