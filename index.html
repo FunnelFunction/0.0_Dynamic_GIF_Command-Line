@@ -1001,7 +1001,9 @@
       
       encode() {
         // First, build unified palette from all frames
+        console.log(`📊 Building palette from ${this.rawFrames.length} frames...`);
         this.buildGlobalPalette();
+        console.log(`📊 Palette built: ${this.paletteColors.length} colors`);
         
         const chunks = [];
         
@@ -1037,6 +1039,8 @@
           const imageData = this.rawFrames[f];
           const delay = this.delays[f];
           
+          console.log(`  Encoding frame ${f + 1}/${this.rawFrames.length}, delay=${delay * 10}ms`);
+          
           // Quantize this frame using global palette
           const indices = this.quantizeFrame(imageData);
           
@@ -1045,7 +1049,7 @@
           gce[0] = 0x21; // Extension introducer
           gce[1] = 0xF9; // Graphic control label
           gce[2] = 0x04; // Block size
-          gce[3] = 0x00; // Packed byte (no transparency, no disposal)
+          gce[3] = 0x08; // Disposal method 2 (restore to background) = bits 4-2 = 010 = 0x08
           gce[4] = delay & 0xFF;
           gce[5] = (delay >> 8) & 0xFF;
           gce[6] = 0x00; // Transparent color index
@@ -1113,13 +1117,21 @@
      */
     async function generateAnimatedGIF(frames, width, height) {
       try {
+        console.log(`🎬 GIF Encoder: ${frames.length} frames, ${width}x${height}`);
+        
         const encoder = new GifEncoder(width, height);
         
-        for (const frame of frames) {
+        for (let i = 0; i < frames.length; i++) {
+          const frame = frames[i];
+          console.log(`  Frame ${i + 1}: delay=${frame.delay}ms, data=${frame.imageData.data.length} bytes`);
           encoder.addFrame(frame.imageData, frame.delay);
         }
         
-        return encoder.toDataURL();
+        console.log('🔧 Building global palette from all frames...');
+        const result = encoder.toDataURL();
+        console.log(`✅ GIF encoded: ${result.length} chars, starts with: ${result.substring(0, 50)}`);
+        
+        return result;
       } catch (error) {
         console.error('GIF encoding error:', error);
         return canvas.toDataURL('image/png');
