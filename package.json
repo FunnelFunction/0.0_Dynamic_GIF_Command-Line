@@ -1,7 +1,6 @@
 {
   "name": "dynamic-gif-command-line",
   "version": "1.0.0",
-  "description": "URL-to-GIF: Autonomous Declarative Visual Compilation via Pre-Emergent Dynamics",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,10 +8,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "gifenc": "^1.0.3"
+    "svelte": "^4.2.8",
+    "gifenc": "^1.0.3",
+    "chroma-js": "^2.4.2",
+    "lodash-es": "^4.17.21",
+    "nanoid": "^5.0.4",
+    "bezier-easing": "^2.1.0",
+    "gl-matrix": "^3.4.3"
   },
   "devDependencies": {
-    "vite": "^5.0.10"
+    "@sveltejs/vite-plugin-svelte": "^3.0.1",
+    "vite": "^5.0.10",
+    "terser": "^5.27.0"
   },
   "engines": {
     "node": ">=18.0.0"
