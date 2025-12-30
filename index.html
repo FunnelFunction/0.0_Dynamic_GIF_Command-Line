@@ -318,11 +318,14 @@
   <!-- Canvas -->
   <div class="canvas-container">
     <canvas id="preview-canvas" width="400" height="400"></canvas>
+    <!-- Hidden GIF preview that shows when animation is ready -->
+    <img id="gif-preview" style="display: none; max-width: 100%; border-radius: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);" />
   </div>
 
   <!-- Actions -->
   <div class="actions">
     <button class="btn btn-primary" id="render-btn">Render GIF</button>
+    <button class="btn btn-secondary" id="preview-gif-btn" style="display: none;">Preview Animation</button>
     <button class="btn btn-secondary" id="download-btn">Download</button>
   </div>
 
@@ -525,6 +528,37 @@
         <div class="example-item" data-cmd="sequence=Hello~We Are~FunnelFunction~Let's Build Together|palette=purple|timing=1.5s|canvas=16:9">
           <span class="label">Intro:</span> Brand Introduction
           <div class="desc">Widescreen brand animation</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Zone-Based Layouts (Advanced) -->
+    <div class="example-category">
+      <h4>🏗️ ZONE-BASED LAYOUTS (Professional Ads)</h4>
+      <div class="example-list">
+        <div class="example-item" data-cmd="header=FunnelFunction|subheader=Lead Generation|content=Email Automation~CRM Integration~Analytics Dashboard~Conversion Tracking|footer=funnelfunction.com|decorations=corners,squares|timing=2s">
+          <span class="label">Corporate:</span> FunnelFunction Services
+          <div class="desc">Fixed header/footer, animated services</div>
+        </div>
+        <div class="example-item" data-cmd="header=TechCorp|subheader=Solutions|content=Web Development~Mobile Apps~Cloud Services~AI Integration|footer=techcorp.io|decorations=corners|subheaderColor=#00ff00|timing=1.5s">
+          <span class="label">Tech:</span> Service Showcase
+          <div class="desc">Green accent, corner brackets</div>
+        </div>
+        <div class="example-item" data-cmd="header=Mayo Clinic|subheader=Primary Care|content=Internal Medicine~Family Health~Preventive Care~Wellness Programs|tagline=The Needs of the Patient Come First|footer=mayoclinic.org|decorations=corners,circles|subheaderColor=#00ff00|timing=2.5s">
+          <span class="label">Healthcare:</span> Medical Services
+          <div class="desc">Full zone layout with tagline</div>
+        </div>
+        <div class="example-item" data-cmd="header=Amazon|subheader=Prime|content=Free Shipping~Video Streaming~Music Unlimited~Exclusive Deals|decorations=corners,circles|backgroundColor=#1a1a1a|subheaderColor=#00ff00|timing=2s">
+          <span class="label">Brand:</span> Amazon Prime
+          <div class="desc">Dark theme, centered circles</div>
+        </div>
+        <div class="example-item" data-cmd="header=Future Tech|subheader=AI Automations|content=Machine Learning~Neural Networks~Computer Vision~NLP Solutions|tagline=We build tomorrow|footer=future.tech|background=gradient|palette=sunset|decorations=corners,circles|timing=2s">
+          <span class="label">AI:</span> Future Tech
+          <div class="desc">Gradient background with decorations</div>
+        </div>
+        <div class="example-item" data-cmd="header=StartupName|subheader=Expert Consulting|content=Strategy~Development~Marketing~Growth|decorations=corners,pinstripes|backgroundColor=#1a1a3a|subheaderColor=#00d4ff|decorationColor=#7b61ff|timing=1.5s">
+          <span class="label">Startup:</span> Consulting Services  
+          <div class="desc">Purple pinstripes, cyan accent</div>
         </div>
       </div>
     </div>
@@ -812,11 +846,299 @@
 
     /**
      * ============================================
-     * INLINE GIF ENCODER v2 - Unified Palette
-     * Based on LZW compression for GIF89a format
-     * Builds palette from ALL frames for consistency
+     * ZONE-BASED LAYOUT SYSTEM
+     * Fixed zones + animated content zone
      * ============================================
      */
+    
+    // Decoration drawing functions
+    const Decorations = {
+      // Corner brackets [ ]
+      corners: (ctx, w, h, color, thickness = 2, size = 30) => {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = thickness;
+        const margin = 15;
+        
+        // Top-left
+        ctx.beginPath();
+        ctx.moveTo(margin, margin + size);
+        ctx.lineTo(margin, margin);
+        ctx.lineTo(margin + size, margin);
+        ctx.stroke();
+        
+        // Top-right
+        ctx.beginPath();
+        ctx.moveTo(w - margin - size, margin);
+        ctx.lineTo(w - margin, margin);
+        ctx.lineTo(w - margin, margin + size);
+        ctx.stroke();
+        
+        // Bottom-left
+        ctx.beginPath();
+        ctx.moveTo(margin, h - margin - size);
+        ctx.lineTo(margin, h - margin);
+        ctx.lineTo(margin + size, h - margin);
+        ctx.stroke();
+        
+        // Bottom-right
+        ctx.beginPath();
+        ctx.moveTo(w - margin - size, h - margin);
+        ctx.lineTo(w - margin, h - margin);
+        ctx.lineTo(w - margin, h - margin - size);
+        ctx.stroke();
+      },
+      
+      // Outline circles
+      circles: (ctx, w, h, color, positions = ['topLeft', 'bottomRight']) => {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        
+        const configs = {
+          topLeft: { x: 80, y: 80, r: 40 },
+          topRight: { x: w - 80, y: 80, r: 40 },
+          bottomLeft: { x: 80, y: h - 80, r: 35 },
+          bottomRight: { x: w - 80, y: h - 80, r: 35 },
+          center: { x: w / 2, y: h / 2, r: 80 },
+          centerLarge: { x: w / 2, y: h / 2, r: 120 }
+        };
+        
+        positions.forEach(pos => {
+          const cfg = configs[pos];
+          if (cfg) {
+            ctx.beginPath();
+            ctx.arc(cfg.x, cfg.y, cfg.r, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+        });
+      },
+      
+      // Filled rectangle/square
+      square: (ctx, w, h, color, positions = ['bottomLeft']) => {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        
+        const configs = {
+          bottomLeft: { x: 30, y: h - 80, size: 50 },
+          bottomRight: { x: w - 80, y: h - 80, size: 50 },
+          topLeft: { x: 30, y: 30, size: 50 },
+          topRight: { x: w - 80, y: 30, size: 50 }
+        };
+        
+        positions.forEach(pos => {
+          const cfg = configs[pos];
+          if (cfg) {
+            ctx.strokeRect(cfg.x, cfg.y, cfg.size, cfg.size);
+          }
+        });
+      },
+      
+      // Diagonal pinstripes
+      pinstripes: (ctx, w, h, color, angle = 45, spacing = 60) => {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1;
+        ctx.globalAlpha = 0.3;
+        
+        const radians = (angle * Math.PI) / 180;
+        const length = Math.sqrt(w * w + h * h);
+        
+        for (let i = -length; i < length * 2; i += spacing) {
+          ctx.beginPath();
+          ctx.moveTo(i, 0);
+          ctx.lineTo(i + Math.cos(radians) * length, Math.sin(radians) * length);
+          ctx.stroke();
+        }
+        
+        ctx.globalAlpha = 1;
+      },
+      
+      // Navigation dots
+      navDots: (ctx, w, h, color, count = 3, activeIndex = 0) => {
+        const dotRadius = 4;
+        const spacing = 20;
+        const totalWidth = (count - 1) * spacing;
+        const startX = (w - totalWidth) / 2;
+        const y = h - 40;
+        
+        for (let i = 0; i < count; i++) {
+          ctx.beginPath();
+          ctx.arc(startX + i * spacing, y, dotRadius, 0, Math.PI * 2);
+          if (i === activeIndex) {
+            ctx.fillStyle = color;
+            ctx.fill();
+          } else {
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      },
+      
+      // Horizontal line/divider
+      divider: (ctx, w, y, color, width = 0.6) => {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1;
+        const lineWidth = w * width;
+        const startX = (w - lineWidth) / 2;
+        ctx.beginPath();
+        ctx.moveTo(startX, y);
+        ctx.lineTo(startX + lineWidth, y);
+        ctx.stroke();
+      }
+    };
+    
+    /**
+     * Parse zoned layout command
+     */
+    function parseZonedCommand(cmdStr) {
+      const manifest = {
+        layout: 'zones',
+        header: null,
+        headerColor: '#ffffff',
+        subheader: null,
+        subheaderColor: '#00ff00',
+        content: [],  // Array of content frames
+        tagline: null,
+        taglineColor: '#cccccc',
+        footer: null,
+        footerColor: '#888888',
+        palette: 'corporate',
+        canvas: '4:5',  // Default to portrait for ads
+        decorations: ['corners'],
+        decorationColor: '#00ff00',
+        timing: 2000,
+        background: 'solid',  // solid, gradient
+        backgroundColor: '#1a1a1a'
+      };
+      
+      const parts = cmdStr.split('|');
+      for (const part of parts) {
+        const [key, ...valueParts] = part.split('=');
+        const value = valueParts.join('=').trim();
+        const k = key.trim();
+        
+        if (k === 'content') {
+          // Content can be animated: content=Frame1~Frame2~Frame3
+          manifest.content = value.split('~').map(s => s.trim());
+        } else if (k === 'decorations') {
+          // decorations=corners,circles,squares
+          manifest.decorations = value.split(',').map(s => s.trim());
+        } else if (k === 'timing') {
+          manifest.timing = value.endsWith('s') ? parseFloat(value) * 1000 : parseFloat(value);
+        } else if (manifest.hasOwnProperty(k)) {
+          manifest[k] = value;
+        }
+      }
+      
+      return manifest;
+    }
+    
+    /**
+     * Render a zoned frame
+     */
+    function renderZonedFrame(manifest, contentIndex = 0) {
+      const canvasSize = CANVAS_SIZES[manifest.canvas] || CANVAS_SIZES['4:5'];
+      const { width: w, height: h } = canvasSize;
+      
+      canvas.width = w;
+      canvas.height = h;
+      
+      // Get palette colors
+      const palette = PALETTES[manifest.palette] || PALETTES.corporate;
+      
+      // === BACKGROUND ===
+      if (manifest.background === 'gradient') {
+        const gradient = ctx.createLinearGradient(0, 0, w, h);
+        palette.gradient.forEach((color, i) => {
+          gradient.addColorStop(i / (palette.gradient.length - 1), color);
+        });
+        ctx.fillStyle = gradient;
+      } else {
+        ctx.fillStyle = manifest.backgroundColor;
+      }
+      ctx.fillRect(0, 0, w, h);
+      
+      // === DECORATIONS LAYER ===
+      const decoColor = manifest.decorationColor;
+      
+      if (manifest.decorations.includes('corners')) {
+        Decorations.corners(ctx, w, h, decoColor);
+      }
+      if (manifest.decorations.includes('circles')) {
+        Decorations.circles(ctx, w, h, decoColor, ['topLeft', 'center']);
+      }
+      if (manifest.decorations.includes('squares')) {
+        Decorations.square(ctx, w, h, decoColor, ['bottomLeft', 'bottomRight']);
+      }
+      if (manifest.decorations.includes('pinstripes')) {
+        Decorations.pinstripes(ctx, w, h, decoColor);
+      }
+      
+      // === TEXT ZONES ===
+      ctx.textAlign = 'center';
+      
+      // Zone Y positions (proportional)
+      const headerY = h * 0.20;
+      const subheaderY = h * 0.32;
+      const contentY = h * 0.48;
+      const taglineY = h * 0.62;
+      const footerY = h * 0.72;
+      
+      // HEADER (fixed, large, bold)
+      if (manifest.header) {
+        ctx.fillStyle = manifest.headerColor;
+        ctx.font = `800 ${Math.floor(w * 0.10)}px 'SF Mono', 'Courier New', monospace`;
+        ctx.fillText(manifest.header, w / 2, headerY);
+      }
+      
+      // Divider line after header
+      if (manifest.header && manifest.subheader) {
+        Decorations.divider(ctx, w, headerY + 25, decoColor, 0.5);
+      }
+      
+      // SUBHEADER (fixed, colored, medium)
+      if (manifest.subheader) {
+        ctx.fillStyle = manifest.subheaderColor;
+        ctx.font = `400 ${Math.floor(w * 0.07)}px Inter, -apple-system, sans-serif`;
+        ctx.fillText(manifest.subheader, w / 2, subheaderY);
+      }
+      
+      // CONTENT (animated zone!)
+      if (manifest.content.length > 0) {
+        const currentContent = manifest.content[contentIndex % manifest.content.length];
+        ctx.fillStyle = palette.text || '#ffffff';
+        ctx.font = `600 ${Math.floor(w * 0.055)}px Inter, -apple-system, sans-serif`;
+        
+        // Wrap content text
+        const lines = wrapText(ctx, currentContent, w * 0.8);
+        const lineHeight = Math.floor(w * 0.07);
+        const startY = contentY - ((lines.length - 1) * lineHeight) / 2;
+        
+        lines.forEach((line, i) => {
+          ctx.fillText(line, w / 2, startY + i * lineHeight);
+        });
+      }
+      
+      // TAGLINE (fixed, smaller)
+      if (manifest.tagline) {
+        ctx.fillStyle = manifest.taglineColor;
+        ctx.font = `400 ${Math.floor(w * 0.04)}px Inter, -apple-system, sans-serif`;
+        ctx.fillText(manifest.tagline, w / 2, taglineY);
+      }
+      
+      // FOOTER (fixed, small, muted)
+      if (manifest.footer) {
+        ctx.fillStyle = manifest.footerColor;
+        ctx.font = `400 ${Math.floor(w * 0.035)}px Inter, -apple-system, sans-serif`;
+        ctx.fillText(manifest.footer, w / 2, footerY);
+      }
+      
+      // Navigation dots (show which frame we're on)
+      if (manifest.content.length > 1) {
+        Decorations.navDots(ctx, w, h, decoColor, manifest.content.length, contentIndex);
+      }
+      
+      return ctx.getImageData(0, 0, w, h);
+    }
     
     class GifEncoder {
       constructor(width, height) {
@@ -1049,7 +1371,7 @@
           gce[0] = 0x21; // Extension introducer
           gce[1] = 0xF9; // Graphic control label
           gce[2] = 0x04; // Block size
-          gce[3] = 0x08; // Disposal method 2 (restore to background) = bits 4-2 = 010 = 0x08
+          gce[3] = 0x04; // Disposal method 1 (do not dispose) = bits 4-2 = 001 = 0x04
           gce[4] = delay & 0xFF;
           gce[5] = (delay >> 8) & 0xFF;
           gce[6] = 0x00; // Transparent color index
@@ -1119,17 +1441,36 @@
       try {
         console.log(`🎬 GIF Encoder: ${frames.length} frames, ${width}x${height}`);
         
+        // Verify frames are unique by checking first 100 pixels
+        const frameHashes = [];
+        for (let i = 0; i < frames.length; i++) {
+          const data = frames[i].imageData.data;
+          let hash = 0;
+          for (let j = 0; j < Math.min(400, data.length); j++) {
+            hash = ((hash << 5) - hash + data[j]) | 0;
+          }
+          frameHashes.push(hash);
+          console.log(`  Frame ${i + 1}: delay=${frames[i].delay}ms, hash=${hash}, first pixels: R=${data[0]},G=${data[1]},B=${data[2]}`);
+        }
+        
+        // Check if all frames are identical
+        const uniqueHashes = new Set(frameHashes);
+        if (uniqueHashes.size === 1) {
+          console.warn('⚠️ WARNING: All frames appear identical!');
+        } else {
+          console.log(`✓ Frames verified unique: ${uniqueHashes.size} distinct frames`);
+        }
+        
         const encoder = new GifEncoder(width, height);
         
-        for (let i = 0; i < frames.length; i++) {
-          const frame = frames[i];
-          console.log(`  Frame ${i + 1}: delay=${frame.delay}ms, data=${frame.imageData.data.length} bytes`);
+        for (const frame of frames) {
           encoder.addFrame(frame.imageData, frame.delay);
         }
         
         console.log('🔧 Building global palette from all frames...');
         const result = encoder.toDataURL();
-        console.log(`✅ GIF encoded: ${result.length} chars, starts with: ${result.substring(0, 50)}`);
+        console.log(`✅ GIF encoded: ${result.length} chars`);
+        console.log(`   Type check: starts with "data:image/gif" = ${result.startsWith('data:image/gif')}`);
         
         return result;
       } catch (error) {
@@ -1147,13 +1488,66 @@
 
     /**
      * Main execution pipeline
-     * Supports both single-frame and multi-frame sequences
+     * Supports: single-frame, multi-frame sequences, and zone-based layouts
      */
     async function execute(cmdStr) {
       try {
         // 1. Parse
         statusEl.className = 'status info';
         statusEl.textContent = '⚙️ Parsing command...';
+        
+        // Detect layout type
+        const isZonedLayout = cmdStr.includes('header=') || cmdStr.includes('layout=zones');
+        
+        if (isZonedLayout) {
+          // === ZONE-BASED LAYOUT ===
+          console.log('🏗️ Zone-based layout detected');
+          const manifest = parseZonedCommand(cmdStr);
+          console.log('📝 Zoned manifest:', manifest);
+          
+          const frameCount = Math.max(1, manifest.content.length);
+          const canvasSize = CANVAS_SIZES[manifest.canvas] || CANVAS_SIZES['4:5'];
+          
+          if (frameCount > 1) {
+            // Multi-frame zoned animation
+            statusEl.textContent = `🎬 Rendering ${frameCount} zoned frames...`;
+            const frames = [];
+            
+            for (let i = 0; i < frameCount; i++) {
+              statusEl.textContent = `🎬 Rendering zone frame ${i + 1}/${frameCount}...`;
+              const imageData = renderZonedFrame(manifest, i);
+              frames.push({
+                imageData: imageData,
+                delay: manifest.timing
+              });
+              await new Promise(r => setTimeout(r, 30));
+            }
+            
+            // Show last frame in preview
+            renderZonedFrame(manifest, frameCount - 1);
+            
+            // Generate animated GIF
+            statusEl.textContent = '📦 Encoding zoned GIF...';
+            gifData = await generateAnimatedGIF(frames, canvasSize.width, canvasSize.height);
+            
+            const duration = (frameCount * manifest.timing / 1000).toFixed(1);
+            statusEl.className = 'status success';
+            statusEl.textContent = `✓ Zoned GIF ready! ${frameCount} frames, ${duration}s duration`;
+            
+          } else {
+            // Single-frame zoned layout
+            statusEl.textContent = '🎨 Rendering zoned layout...';
+            renderZonedFrame(manifest, 0);
+            gifData = canvas.toDataURL('image/png');
+            
+            statusEl.className = 'status success';
+            statusEl.textContent = `✓ Zoned image ready!`;
+          }
+          
+          return;
+        }
+        
+        // === STANDARD LAYOUT (existing code) ===
         const manifest = parseCommand(cmdStr);
         console.log('📝 Parsed:', manifest);
         
@@ -1242,10 +1636,18 @@
       const isGif = gifData.startsWith('data:image/gif');
       const ext = isGif ? 'gif' : 'png';
       
+      console.log(`📥 Downloading as .${ext}`);
+      console.log(`   Data URL length: ${gifData.length}`);
+      console.log(`   Starts with: ${gifData.substring(0, 30)}`);
+      
       const link = document.createElement('a');
       link.download = `dynamic-gif-${Date.now()}.${ext}`;
       link.href = gifData;
+      document.body.appendChild(link); // Required for Firefox
       link.click();
+      document.body.removeChild(link);
+      
+      console.log(`✓ Download triggered: ${link.download}`);
     }
 
     // Event Listeners
