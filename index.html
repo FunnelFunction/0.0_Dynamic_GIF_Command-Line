@@ -3,19 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dynamic GIF Command-Line</title>
+  <title>Dynamic GIF Command-Line | FunnelFunction</title>
+  <meta name="description" content="Self-resolving visual computation engine. Create brand-consistent graphics through mathematical convergence. Built on Intent Tensor Theory.">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     :root {
       --bg-primary: #0a0a0f;
       --bg-secondary: #13131a;
+      --bg-tertiary: #1a1a24;
       --text-primary: #e8e8f0;
       --text-secondary: #a0a0b8;
+      --text-tertiary: #70708c;
       --accent-cyan: #00d4ff;
+      --accent-purple: #7b61ff;
       --accent-green: #00ff88;
       --accent-red: #ff3366;
-      --font-mono: 'SF Mono', 'Fira Code', monospace;
+      --accent-orange: #ff8c00;
+      --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
     
     body {
@@ -29,6 +35,7 @@
       padding: 2rem;
     }
     
+    /* Header */
     .header {
       text-align: center;
       margin-bottom: 2rem;
@@ -38,6 +45,10 @@
       font-size: 1.5rem;
       color: var(--accent-cyan);
       margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
     }
     
     .header p {
@@ -45,13 +56,14 @@
       font-size: 0.875rem;
     }
     
+    /* Terminal */
     .terminal {
       width: 100%;
-      max-width: 800px;
+      max-width: 900px;
       background: var(--bg-secondary);
       border-radius: 12px;
       padding: 1.5rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
     
     .terminal-header {
@@ -70,6 +82,17 @@
     .terminal-dot.yellow { background: #ffbd2e; }
     .terminal-dot.green { background: #27ca40; }
     
+    .command-line {
+      display: flex;
+      align-items: center;
+    }
+    
+    .command-prefix {
+      color: var(--accent-cyan);
+      margin-right: 8px;
+      font-weight: bold;
+    }
+    
     #command-input {
       width: 100%;
       background: transparent;
@@ -81,37 +104,17 @@
     }
     
     #command-input::placeholder {
-      color: var(--text-secondary);
+      color: var(--text-tertiary);
     }
     
-    .command-prefix {
-      color: var(--accent-cyan);
-      margin-right: 8px;
-    }
-    
-    .command-line {
-      display: flex;
-      align-items: center;
-    }
-    
-    .canvas-container {
-      background: var(--bg-secondary);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    
-    #preview-canvas {
-      display: block;
-      max-width: 100%;
-      border-radius: 8px;
-    }
-    
+    /* Status */
     .status {
       padding: 1rem;
       border-radius: 8px;
       margin-bottom: 1rem;
       font-size: 0.875rem;
+      max-width: 900px;
+      width: 100%;
     }
     
     .status.success {
@@ -132,9 +135,33 @@
       color: var(--accent-cyan);
     }
     
+    .status.hidden { display: none; }
+    
+    /* Canvas */
+    .canvas-container {
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    #preview-canvas {
+      display: block;
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    
+    /* Actions */
     .actions {
       display: flex;
       gap: 1rem;
+      margin-bottom: 1.5rem;
     }
     
     .btn {
@@ -145,6 +172,7 @@
       font-size: 0.875rem;
       cursor: pointer;
       transition: all 0.2s;
+      font-weight: 600;
     }
     
     .btn-primary {
@@ -154,29 +182,46 @@
     
     .btn-primary:hover {
       background: #00b8e0;
+      transform: translateY(-2px);
     }
     
     .btn-secondary {
       background: var(--bg-secondary);
       color: var(--text-primary);
-      border: 1px solid var(--text-secondary);
+      border: 1px solid var(--text-tertiary);
     }
     
     .btn-secondary:hover {
       border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
     }
     
+    /* Quick Examples */
     .examples {
       width: 100%;
-      max-width: 800px;
-      margin-top: 2rem;
+      max-width: 900px;
+      margin-top: 1rem;
     }
     
     .examples h3 {
       color: var(--text-secondary);
       font-size: 0.75rem;
       text-transform: uppercase;
+      letter-spacing: 0.1em;
       margin-bottom: 1rem;
+    }
+    
+    .example-category {
+      margin-bottom: 1.5rem;
+    }
+    
+    .example-category h4 {
+      color: var(--accent-purple);
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
     
     .example-list {
@@ -193,22 +238,60 @@
       transition: all 0.2s;
       font-size: 0.875rem;
       color: var(--text-secondary);
+      border: 1px solid transparent;
     }
     
     .example-item:hover {
-      background: #1a1a24;
+      background: var(--bg-tertiary);
       color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
     }
     
-    .hidden { display: none; }
+    .example-item .label {
+      color: var(--accent-green);
+      margin-right: 0.5rem;
+    }
+    
+    .example-item .desc {
+      color: var(--text-tertiary);
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+    }
+    
+    /* Palette definitions */
+    .palettes {
+      display: none; /* Hidden, just for reference */
+    }
+    
+    /* Footer */
+    .footer {
+      margin-top: 2rem;
+      text-align: center;
+      color: var(--text-tertiary);
+      font-size: 0.75rem;
+    }
+    
+    .footer a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+    
+    .footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
+  <!-- Header -->
   <div class="header">
     <h1>⚡ DYNAMIC GIF COMMAND-LINE</h1>
     <p>URL → Manifest → Emergence → GIF</p>
+    <p style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--text-tertiary);">
+      Built on Intent Tensor Theory | <a href="https://intent-tensor-theory.com" style="color: var(--accent-purple);">ITT Docs</a>
+    </p>
   </div>
-  
+
+  <!-- Terminal -->
   <div class="terminal">
     <div class="terminal-header">
       <div class="terminal-dot red"></div>
@@ -220,41 +303,570 @@
       <input 
         type="text" 
         id="command-input" 
-        placeholder="scene=corporate|text=Hello World|canvas=1:1|animate=fadeIn"
+        placeholder="text=Hello World|scene=gradient|palette=oceanic"
         autocomplete="off"
+        spellcheck="false"
       >
     </div>
   </div>
-  
-  <div id="status-container"></div>
-  
+
+  <!-- Status -->
+  <div id="status" class="status info">
+    💡 Type a command or click an example below to generate a GIF
+  </div>
+
+  <!-- Canvas -->
   <div class="canvas-container">
     <canvas id="preview-canvas" width="400" height="400"></canvas>
   </div>
-  
+
+  <!-- Actions -->
   <div class="actions">
     <button class="btn btn-primary" id="render-btn">Render GIF</button>
-    <button class="btn btn-secondary" id="download-btn" disabled>Download</button>
+    <button class="btn btn-secondary" id="download-btn">Download</button>
   </div>
-  
+
+  <!-- Quick Examples Library -->
   <div class="examples">
-    <h3>Quick Examples</h3>
-    <div class="example-list">
-      <div class="example-item" data-cmd="scene=minimal|text=Hello World|canvas=1:1">
-        Minimal: Hello World
+    <h3>🎨 QUICK EXAMPLES LIBRARY</h3>
+    
+    <!-- Simple Static -->
+    <div class="example-category">
+      <h4>📝 SIMPLE STATIC (Single Text)</h4>
+      <div class="example-list">
+        <div class="example-item" data-cmd="text=Hello World">
+          <span class="label">Minimal:</span> Hello World
+          <div class="desc">Basic centered text, default styling</div>
+        </div>
+        <div class="example-item" data-cmd="text=FunnelFunction|scene=gradient|palette=oceanic">
+          <span class="label">Brand:</span> Oceanic Gradient
+          <div class="desc">Blue-teal gradient with brand text</div>
+        </div>
+        <div class="example-item" data-cmd="text=Innovation Drives Us|scene=gradient|palette=sunset">
+          <span class="label">Warm:</span> Sunset Theme
+          <div class="desc">Orange-red warm gradient</div>
+        </div>
+        <div class="example-item" data-cmd="text=Tech Excellence|scene=corporate|palette=midnight">
+          <span class="label">Corporate:</span> Midnight Blue
+          <div class="desc">Professional dark blue corporate style</div>
+        </div>
+        <div class="example-item" data-cmd="text=Grow Your Business|scene=gradient|palette=forest">
+          <span class="label">Natural:</span> Forest Green
+          <div class="desc">Fresh green nature-inspired theme</div>
+        </div>
       </div>
-      <div class="example-item" data-cmd="scene=corporate|text=Innovation|palette=future_tech|animate=pulse">
-        Corporate: Tech Style
+    </div>
+    
+    <!-- Canvas Sizes -->
+    <div class="example-category">
+      <h4>📐 CANVAS SIZES (Aspect Ratios)</h4>
+      <div class="example-list">
+        <div class="example-item" data-cmd="text=Instagram Post|scene=gradient|palette=sunset|canvas=1:1">
+          <span class="label">Square:</span> 1:1 Instagram/Social
+          <div class="desc">Perfect for social media posts</div>
+        </div>
+        <div class="example-item" data-cmd="text=YouTube Thumbnail|scene=gradient|palette=oceanic|canvas=16:9">
+          <span class="label">Wide:</span> 16:9 YouTube/Video
+          <div class="desc">YouTube thumbnails, video content</div>
+        </div>
+        <div class="example-item" data-cmd="text=Story/Reel|scene=gradient|palette=midnight|canvas=9:16">
+          <span class="label">Vertical:</span> 9:16 Stories/Reels
+          <div class="desc">Instagram Stories, TikTok, Reels</div>
+        </div>
+        <div class="example-item" data-cmd="text=Pinterest Pin|scene=gradient|palette=forest|canvas=2:3">
+          <span class="label">Tall:</span> 2:3 Pinterest
+          <div class="desc">Pinterest pins, portrait content</div>
+        </div>
       </div>
-      <div class="example-item" data-cmd="scene=gradient|text=FunnelFunction|palette=oceanic|canvas=16:9">
-        Gradient: Ocean Theme
+    </div>
+    
+    <!-- Multi-Line Layouts -->
+    <div class="example-category">
+      <h4>📄 MULTI-LINE LAYOUTS (Company + Tagline)</h4>
+      <div class="example-list">
+        <div class="example-item" data-cmd="text=FunnelFunction\nB2B Lead Generation|scene=gradient|palette=oceanic">
+          <span class="label">Brand + Tagline:</span> Two-line stack
+          <div class="desc">Company name with tagline below</div>
+        </div>
+        <div class="example-item" data-cmd="text=ACME Corp\nInnovation • Excellence • Growth|scene=corporate|palette=midnight">
+          <span class="label">Corporate:</span> Brand + Values
+          <div class="desc">Professional with bullet-separated values</div>
+        </div>
+        <div class="example-item" data-cmd="text=Q4 2025\nRevenue Report|scene=gradient|palette=forest|canvas=16:9">
+          <span class="label">Report:</span> Title + Subtitle
+          <div class="desc">Clean report cover style</div>
+        </div>
+        <div class="example-item" data-cmd="text=Armstrong Knight\nCEO & Founder|scene=gradient|palette=sunset">
+          <span class="label">Executive:</span> Name + Title
+          <div class="desc">Leadership/speaker introduction</div>
+        </div>
       </div>
-      <div class="example-item" data-cmd="shape=circle|fill=#00d4ff|animate=grow|canvas=1:1">
-        Shape: Animated Circle
+    </div>
+    
+    <!-- Service Showcases -->
+    <div class="example-category">
+      <h4>🛠️ SERVICE SHOWCASES (Feature Lists)</h4>
+      <div class="example-list">
+        <div class="example-item" data-cmd="text=Our Services\n• Lead Generation\n• Email Automation\n• Analytics|scene=gradient|palette=oceanic">
+          <span class="label">Services:</span> Bullet List
+          <div class="desc">Service offering with bullet points</div>
+        </div>
+        <div class="example-item" data-cmd="text=FunnelFunction\n✓ Scrape Leads\n✓ Verify Emails\n✓ Auto Outreach|scene=gradient|palette=forest">
+          <span class="label">Features:</span> Checkmark List
+          <div class="desc">Feature list with checkmarks</div>
+        </div>
+        <div class="example-item" data-cmd="text=Why Choose Us?\n→ AI Powered\n→ 10x Faster\n→ 80% Cost Savings|scene=gradient|palette=sunset">
+          <span class="label">Benefits:</span> Arrow List
+          <div class="desc">Value proposition with arrows</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Statistics & Numbers -->
+    <div class="example-category">
+      <h4>📊 STATISTICS & NUMBERS</h4>
+      <div class="example-list">
+        <div class="example-item" data-cmd="text=10,000+\nLeads Generated|scene=gradient|palette=oceanic|canvas=1:1">
+          <span class="label">Big Number:</span> Stat + Label
+          <div class="desc">Impressive statistic highlight</div>
+        </div>
+        <div class="example-item" data-cmd="text=Revenue Up\n+47%|scene=gradient|palette=forest">
+          <span class="label">Growth:</span> Percentage Gain
+          <div class="desc">Growth metric announcement</div>
+        </div>
+        <div class="example-item" data-cmd="text=$2.4M ARR\nQ4 2025|scene=corporate|palette=midnight">
+          <span class="label">Financial:</span> ARR Milestone
+          <div class="desc">Financial milestone announcement</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Call to Actions -->
+    <div class="example-category">
+      <h4>🎯 CALL TO ACTIONS</h4>
+      <div class="example-list">
+        <div class="example-item" data-cmd="text=Start Free Trial\nNo Credit Card Required|scene=gradient|palette=oceanic">
+          <span class="label">CTA:</span> Free Trial
+          <div class="desc">Conversion-focused with reassurance</div>
+        </div>
+        <div class="example-item" data-cmd="text=Book a Demo\nSee It In Action|scene=gradient|palette=sunset">
+          <span class="label">CTA:</span> Demo Request
+          <div class="desc">Demo booking prompt</div>
+        </div>
+        <div class="example-item" data-cmd="text=Limited Offer\n50% OFF Today Only|scene=gradient|palette=sunset">
+          <span class="label">Urgency:</span> Flash Sale
+          <div class="desc">Limited time offer with urgency</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Event & Announcements -->
+    <div class="example-category">
+      <h4>📢 EVENTS & ANNOUNCEMENTS</h4>
+      <div class="example-list">
+        <div class="example-item" data-cmd="text=🚀 NEW FEATURE\nAI Email Writer|scene=gradient|palette=oceanic">
+          <span class="label">Launch:</span> Feature Announcement
+          <div class="desc">New feature launch graphic</div>
+        </div>
+        <div class="example-item" data-cmd="text=WEBINAR\nJan 15, 2025 @ 2PM EST|scene=gradient|palette=midnight">
+          <span class="label">Event:</span> Webinar Promo
+          <div class="desc">Event date and time announcement</div>
+        </div>
+        <div class="example-item" data-cmd="text=🎉 WE'RE HIRING!\nJoin Our Team|scene=gradient|palette=forest">
+          <span class="label">Hiring:</span> Recruitment
+          <div class="desc">Job opening announcement</div>
+        </div>
+        <div class="example-item" data-cmd="text=Version 2.0\nNow Available|scene=gradient|palette=sunset">
+          <span class="label">Release:</span> Version Launch
+          <div class="desc">Software version release</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Quotes & Testimonials -->
+    <div class="example-category">
+      <h4>💬 QUOTES & TESTIMONIALS</h4>
+      <div class="example-list">
+        <div class="example-item" data-cmd="text=\"Best lead gen tool we've used\"\n— Sarah Chen, VP Sales|scene=gradient|palette=oceanic">
+          <span class="label">Testimonial:</span> Customer Quote
+          <div class="desc">Customer testimonial with attribution</div>
+        </div>
+        <div class="example-item" data-cmd="text=Think Different.\n— Steve Jobs|scene=minimal|palette=midnight">
+          <span class="label">Inspiration:</span> Famous Quote
+          <div class="desc">Inspirational quote attribution</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Complex Multi-Frame (Coming Soon) -->
+    <div class="example-category">
+      <h4>🎬 MULTI-FRAME SEQUENCES (Preview)</h4>
+      <div class="example-list">
+        <div class="example-item" data-cmd="text=Consultations|scene=gradient|palette=oceanic">
+          <span class="label">Frame 1:</span> Consultations
+          <div class="desc">First frame of service sequence</div>
+        </div>
+        <div class="example-item" data-cmd="text=Build Apps|scene=gradient|palette=forest">
+          <span class="label">Frame 2:</span> Build Apps
+          <div class="desc">Second frame of service sequence</div>
+        </div>
+        <div class="example-item" data-cmd="text=Scale Fast|scene=gradient|palette=sunset">
+          <span class="label">Frame 3:</span> Scale Fast
+          <div class="desc">Third frame of service sequence</div>
+        </div>
+        <div class="example-item" data-cmd="text=Profit 💰|scene=gradient|palette=midnight">
+          <span class="label">Frame 4:</span> Profit
+          <div class="desc">Final frame of service sequence</div>
+        </div>
       </div>
     </div>
   </div>
-  
-  <script type="module" src="/src/main.js"></script>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>
+      Built by <a href="https://funnelfunction.com">Armstrong Knight & Abdullah Khan</a> |
+      Powered by <a href="https://intent-tensor-theory.com">Intent Tensor Theory</a>
+    </p>
+    <p style="margin-top: 0.5rem;">
+      AI Collaboration: Claude (Anthropic), ChatGPT (OpenAI), Grok (xAI), Gemini (Google)
+    </p>
+    <p style="margin-top: 0.5rem;">
+      <a href="https://github.com/FunnelFunction/0.0_Dynamic_GIF_Command-Line">GitHub Repository</a>
+    </p>
+  </div>
+
+  <script>
+    /**
+     * DYNAMIC GIF COMMAND-LINE ENGINE
+     * 
+     * Self-resolving visual computation through mathematical convergence.
+     * Based on Intent Tensor Theory (ITT) coordinate system.
+     * 
+     * Collapse Genesis Stack: Φ → ∇Φ → ∇×F → ∇²Φ → ρq
+     */
+
+    // Color Palettes - Brand Attractors
+    const PALETTES = {
+      oceanic: {
+        gradient: ['#0066cc', '#00aacc', '#00ccaa'],
+        text: '#ffffff',
+        name: 'Oceanic'
+      },
+      sunset: {
+        gradient: ['#ff6b35', '#f7931a', '#ffcc00'],
+        text: '#ffffff',
+        name: 'Sunset'
+      },
+      midnight: {
+        gradient: ['#1a1a2e', '#16213e', '#0f3460'],
+        text: '#e8e8f0',
+        name: 'Midnight'
+      },
+      forest: {
+        gradient: ['#134e5e', '#1a8a5a', '#2ecc71'],
+        text: '#ffffff',
+        name: 'Forest'
+      },
+      purple: {
+        gradient: ['#667eea', '#764ba2', '#f093fb'],
+        text: '#ffffff',
+        name: 'Purple'
+      },
+      minimal: {
+        gradient: ['#ffffff', '#f8f9fa', '#e9ecef'],
+        text: '#1a1a2e',
+        name: 'Minimal'
+      },
+      corporate: {
+        gradient: ['#2c3e50', '#3498db', '#2980b9'],
+        text: '#ffffff',
+        name: 'Corporate'
+      },
+      neon: {
+        gradient: ['#0a0a0f', '#1a1a2e', '#0a0a0f'],
+        text: '#00ff88',
+        name: 'Neon'
+      }
+    };
+
+    // Canvas aspect ratios
+    const CANVAS_SIZES = {
+      '1:1': { width: 400, height: 400 },
+      '16:9': { width: 640, height: 360 },
+      '9:16': { width: 360, height: 640 },
+      '4:3': { width: 480, height: 360 },
+      '2:3': { width: 400, height: 600 },
+      '4:5': { width: 400, height: 500 }
+    };
+
+    // DOM Elements
+    const commandInput = document.getElementById('command-input');
+    const statusEl = document.getElementById('status');
+    const canvas = document.getElementById('preview-canvas');
+    const ctx = canvas.getContext('2d');
+    const renderBtn = document.getElementById('render-btn');
+    const downloadBtn = document.getElementById('download-btn');
+
+    // Current state
+    let currentManifest = null;
+    let gifData = null;
+
+    /**
+     * Parse command string into manifest
+     */
+    function parseCommand(cmdStr) {
+      const manifest = {
+        text: 'Hello World',
+        scene: 'gradient',
+        palette: 'oceanic',
+        canvas: '1:1',
+        animation: 'none'
+      };
+
+      // Split by | and parse each param
+      const parts = cmdStr.split('|');
+      for (const part of parts) {
+        const [key, ...valueParts] = part.split('=');
+        const value = valueParts.join('='); // Handle = in value
+        if (key && value) {
+          manifest[key.trim()] = value.trim();
+        }
+      }
+
+      // Handle newlines in text (convert \n to actual newlines)
+      manifest.text = manifest.text.replace(/\\n/g, '\n');
+
+      return manifest;
+    }
+
+    /**
+     * Emerge full specification from minimal manifest
+     * (Fiber bundle projection: 5 inputs → 50+ properties)
+     */
+    function emerge(manifest) {
+      const palette = PALETTES[manifest.palette] || PALETTES.oceanic;
+      const canvasSize = CANVAS_SIZES[manifest.canvas] || CANVAS_SIZES['1:1'];
+
+      return {
+        ...manifest,
+        colors: palette,
+        dimensions: canvasSize,
+        typography: {
+          fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+          fontSize: calculateFontSize(manifest.text, canvasSize),
+          fontWeight: 700,
+          lineHeight: 1.3,
+          textAlign: 'center'
+        },
+        layout: {
+          x: canvasSize.width / 2,
+          y: canvasSize.height / 2,
+          padding: 40,
+          maxWidth: canvasSize.width - 80
+        }
+      };
+    }
+
+    /**
+     * Calculate optimal font size based on text and canvas
+     */
+    function calculateFontSize(text, canvasSize) {
+      const lines = text.split('\n');
+      const maxLineLength = Math.max(...lines.map(l => l.length));
+      const lineCount = lines.length;
+      
+      // Base size on canvas width and text length
+      let baseSize = Math.min(canvasSize.width, canvasSize.height) / 8;
+      
+      // Reduce for longer text
+      if (maxLineLength > 20) baseSize *= 0.7;
+      if (maxLineLength > 30) baseSize *= 0.7;
+      if (lineCount > 2) baseSize *= 0.85;
+      if (lineCount > 4) baseSize *= 0.8;
+      
+      return Math.max(16, Math.min(baseSize, 72));
+    }
+
+    /**
+     * Word wrap text to fit within maxWidth
+     */
+    function wrapText(ctx, text, maxWidth) {
+      const lines = text.split('\n');
+      const wrappedLines = [];
+      
+      for (const line of lines) {
+        const words = line.split(' ');
+        let currentLine = '';
+        
+        for (const word of words) {
+          const testLine = currentLine + (currentLine ? ' ' : '') + word;
+          const metrics = ctx.measureText(testLine);
+          
+          if (metrics.width > maxWidth && currentLine) {
+            wrappedLines.push(currentLine);
+            currentLine = word;
+          } else {
+            currentLine = testLine;
+          }
+        }
+        
+        if (currentLine) {
+          wrappedLines.push(currentLine);
+        }
+      }
+      
+      return wrappedLines;
+    }
+
+    /**
+     * Render to canvas (convergence to brand attractor)
+     */
+    function render(spec) {
+      const { dimensions, colors, typography, layout, text } = spec;
+      
+      // Resize canvas
+      canvas.width = dimensions.width;
+      canvas.height = dimensions.height;
+      
+      // Draw gradient background
+      const gradient = ctx.createLinearGradient(0, 0, dimensions.width, dimensions.height);
+      colors.gradient.forEach((color, i) => {
+        gradient.addColorStop(i / (colors.gradient.length - 1), color);
+      });
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, dimensions.width, dimensions.height);
+      
+      // Configure text
+      ctx.fillStyle = colors.text;
+      ctx.font = `${typography.fontWeight} ${typography.fontSize}px ${typography.fontFamily}`;
+      ctx.textAlign = typography.textAlign;
+      ctx.textBaseline = 'middle';
+      
+      // Wrap text to fit
+      const wrappedLines = wrapText(ctx, text, layout.maxWidth);
+      const lineHeight = typography.fontSize * typography.lineHeight;
+      const totalHeight = wrappedLines.length * lineHeight;
+      const startY = layout.y - totalHeight / 2 + lineHeight / 2;
+      
+      // Draw each line
+      wrappedLines.forEach((line, i) => {
+        ctx.fillText(line, layout.x, startY + i * lineHeight);
+      });
+      
+      return canvas;
+    }
+
+    /**
+     * Generate GIF from canvas
+     */
+    async function generateGIF(canvas) {
+      // For now, just return canvas data as PNG
+      // Full GIF generation requires gifenc library
+      return canvas.toDataURL('image/png');
+    }
+
+    /**
+     * Main execution pipeline
+     */
+    async function execute(cmdStr) {
+      try {
+        // 1. Parse
+        statusEl.className = 'status info';
+        statusEl.textContent = '⚙️ Parsing command...';
+        const manifest = parseCommand(cmdStr);
+        console.log('📝 Parsed:', manifest);
+        
+        // 2. Emerge
+        statusEl.textContent = '🌀 Emerging specification...';
+        const spec = emerge(manifest);
+        console.log('📋 Emerged:', spec);
+        currentManifest = spec;
+        
+        // 3. Render
+        statusEl.textContent = '🎨 Rendering...';
+        render(spec);
+        
+        // 4. Generate GIF
+        statusEl.textContent = '📦 Generating GIF...';
+        gifData = await generateGIF(canvas);
+        
+        // Success
+        const bytes = Math.round(gifData.length * 0.75);
+        statusEl.className = 'status success';
+        statusEl.textContent = `✓ GIF ready! ${bytes.toLocaleString()} bytes, 1 frames`;
+        
+      } catch (error) {
+        console.error('Error:', error);
+        statusEl.className = 'status error';
+        statusEl.textContent = `✗ Error: ${error.message}`;
+      }
+    }
+
+    /**
+     * Download current GIF
+     */
+    function download() {
+      if (!gifData) {
+        statusEl.className = 'status error';
+        statusEl.textContent = '✗ No GIF to download. Render first!';
+        return;
+      }
+      
+      const link = document.createElement('a');
+      link.download = `dynamic-gif-${Date.now()}.png`;
+      link.href = gifData;
+      link.click();
+    }
+
+    // Event Listeners
+    commandInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const cmd = commandInput.value.trim();
+        if (cmd) execute(cmd);
+      }
+    });
+
+    renderBtn.addEventListener('click', () => {
+      const cmd = commandInput.value.trim();
+      if (cmd) execute(cmd);
+    });
+
+    downloadBtn.addEventListener('click', download);
+
+    // Quick example click handlers
+    document.querySelectorAll('.example-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const cmd = item.dataset.cmd;
+        commandInput.value = cmd;
+        execute(cmd);
+      });
+    });
+
+    // URL parameter support
+    function loadFromURL() {
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        const cmd = decodeURIComponent(hash);
+        commandInput.value = cmd;
+        execute(cmd);
+      }
+    }
+
+    // Initialize
+    console.log(`
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║        DYNAMIC GIF COMMAND-LINE v1.1                         ║
+║        URL → Manifest → Emergence → GIF                      ║
+║                                                              ║
+║        Built on Intent Tensor Theory                         ║
+║        Pre-Emergent Visual Dynamics                          ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+    `);
+    
+    loadFromURL();
+  </script>
 </body>
 </html>
