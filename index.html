@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dynamic GIF Command-Line | FunnelFunction</title>
   <meta name="description" content="Self-resolving visual computation engine. Create brand-consistent graphics through mathematical convergence. Built on Intent Tensor Theory.">
+  <!-- GIF Encoder Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
@@ -500,23 +502,31 @@
     
     <!-- Complex Multi-Frame (Coming Soon) -->
     <div class="example-category">
-      <h4>🎬 MULTI-FRAME SEQUENCES (Preview)</h4>
+      <h4>🎬 MULTI-FRAME ANIMATED SEQUENCES</h4>
       <div class="example-list">
-        <div class="example-item" data-cmd="text=Consultations|scene=gradient|palette=oceanic">
-          <span class="label">Frame 1:</span> Consultations
-          <div class="desc">First frame of service sequence</div>
+        <div class="example-item" data-cmd="sequence=Consultations~Build Apps~Scale Fast~Profit 💰|palette=oceanic|timing=2s">
+          <span class="label">Services:</span> 4-Frame Business Sequence
+          <div class="desc">Animated service showcase (use ~ to separate frames)</div>
         </div>
-        <div class="example-item" data-cmd="text=Build Apps|scene=gradient|palette=forest">
-          <span class="label">Frame 2:</span> Build Apps
-          <div class="desc">Second frame of service sequence</div>
+        <div class="example-item" data-cmd="sequence=Q4 Results~Revenue Up 23%~Expanding Markets~2025 Outlook|palette=midnight|timing=3s">
+          <span class="label">Corporate:</span> Quarterly Report Animation
+          <div class="desc">Professional 4-frame announcement</div>
         </div>
-        <div class="example-item" data-cmd="text=Scale Fast|scene=gradient|palette=sunset">
-          <span class="label">Frame 3:</span> Scale Fast
-          <div class="desc">Third frame of service sequence</div>
+        <div class="example-item" data-cmd="sequence=🚀 Launching Soon~New Features~Better UX~Coming January|palette=sunset|timing=1.5s">
+          <span class="label">Launch:</span> Product Teaser
+          <div class="desc">Excitement-building reveal sequence</div>
         </div>
-        <div class="example-item" data-cmd="text=Profit 💰|scene=gradient|palette=midnight">
-          <span class="label">Frame 4:</span> Profit
-          <div class="desc">Final frame of service sequence</div>
+        <div class="example-item" data-cmd="sequence=Step 1: Sign Up~Step 2: Connect~Step 3: Launch~Step 4: Profit!|palette=forest|timing=2s">
+          <span class="label">Tutorial:</span> How It Works
+          <div class="desc">Step-by-step process animation</div>
+        </div>
+        <div class="example-item" data-cmd="sequence=10,000+~Leads Generated~Every Month~FunnelFunction|palette=oceanic|timing=1s">
+          <span class="label">Stats:</span> Metric Animation
+          <div class="desc">Fast-paced statistic showcase</div>
+        </div>
+        <div class="example-item" data-cmd="sequence=Hello~We Are~FunnelFunction~Let's Build Together|palette=purple|timing=1.5s|canvas=16:9">
+          <span class="label">Intro:</span> Brand Introduction
+          <div class="desc">Widescreen brand animation</div>
         </div>
       </div>
     </div>
@@ -614,6 +624,7 @@
 
     /**
      * Parse command string into manifest
+     * Supports: sequence=Frame1|Frame2|Frame3 for multi-frame
      */
     function parseCommand(cmdStr) {
       const manifest = {
@@ -621,16 +632,45 @@
         scene: 'gradient',
         palette: 'oceanic',
         canvas: '1:1',
-        animation: 'none'
+        animation: 'none',
+        sequence: null,
+        timing: 2000, // ms per frame
+        loop: true
       };
 
+      // Split by | but preserve sequence values
+      // First check if there's a sequence parameter
+      const sequenceMatch = cmdStr.match(/sequence=([^|]+(?:\|[^|=]+)*?)(?=\|[a-zA-Z]+=|$)/);
+      if (sequenceMatch) {
+        // Extract sequence frames (split by ~ for sequence separator)
+        manifest.sequence = sequenceMatch[1].split('~').map(s => s.trim());
+        // Remove sequence from cmdStr for further parsing
+        cmdStr = cmdStr.replace(sequenceMatch[0], '');
+      }
+
       // Split by | and parse each param
-      const parts = cmdStr.split('|');
+      const parts = cmdStr.split('|').filter(p => p.trim());
       for (const part of parts) {
         const [key, ...valueParts] = part.split('=');
         const value = valueParts.join('='); // Handle = in value
         if (key && value) {
-          manifest[key.trim()] = value.trim();
+          const k = key.trim();
+          const v = value.trim();
+          
+          if (k === 'timing') {
+            // Parse timing: "2s" -> 2000, "500ms" -> 500
+            if (v.endsWith('s') && !v.endsWith('ms')) {
+              manifest.timing = parseFloat(v) * 1000;
+            } else if (v.endsWith('ms')) {
+              manifest.timing = parseFloat(v);
+            } else {
+              manifest.timing = parseFloat(v) * 1000; // Default to seconds
+            }
+          } else if (k === 'loop') {
+            manifest.loop = v !== 'false' && v !== '0';
+          } else {
+            manifest[k] = v;
+          }
         }
       }
 
@@ -720,10 +760,14 @@
     }
 
     /**
-     * Render to canvas (convergence to brand attractor)
+     * Render a single frame to canvas
+     * @param {Object} spec - Emerged specification
+     * @param {string} textOverride - Optional text override for sequence frames
+     * @returns {ImageData} - Rendered frame data
      */
-    function render(spec) {
-      const { dimensions, colors, typography, layout, text } = spec;
+    function renderFrame(spec, textOverride = null) {
+      const { dimensions, colors, typography, layout } = spec;
+      const text = textOverride || spec.text;
       
       // Resize canvas
       canvas.width = dimensions.width;
@@ -737,15 +781,18 @@
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, dimensions.width, dimensions.height);
       
+      // Recalculate font size for this specific text
+      const fontSize = calculateFontSize(text, dimensions);
+      
       // Configure text
       ctx.fillStyle = colors.text;
-      ctx.font = `${typography.fontWeight} ${typography.fontSize}px ${typography.fontFamily}`;
+      ctx.font = `${typography.fontWeight} ${fontSize}px ${typography.fontFamily}`;
       ctx.textAlign = typography.textAlign;
       ctx.textBaseline = 'middle';
       
       // Wrap text to fit
       const wrappedLines = wrapText(ctx, text, layout.maxWidth);
-      const lineHeight = typography.fontSize * typography.lineHeight;
+      const lineHeight = fontSize * typography.lineHeight;
       const totalHeight = wrappedLines.length * lineHeight;
       const startY = layout.y - totalHeight / 2 + lineHeight / 2;
       
@@ -754,20 +801,68 @@
         ctx.fillText(line, layout.x, startY + i * lineHeight);
       });
       
+      return ctx.getImageData(0, 0, dimensions.width, dimensions.height);
+    }
+
+    /**
+     * Render to canvas (single frame - backward compatible)
+     */
+    function render(spec) {
+      renderFrame(spec);
       return canvas;
     }
 
     /**
-     * Generate GIF from canvas
+     * Generate animated GIF from frames
+     * @param {Array} frames - Array of {imageData, delay} objects
+     * @param {number} width - Canvas width
+     * @param {number} height - Canvas height
+     * @returns {Promise<string>} - Data URL of generated GIF
+     */
+    async function generateAnimatedGIF(frames, width, height) {
+      return new Promise((resolve, reject) => {
+        // Check if GIF library is available
+        if (typeof GIF === 'undefined') {
+          console.warn('GIF library not loaded, falling back to PNG');
+          resolve(canvas.toDataURL('image/png'));
+          return;
+        }
+
+        const gif = new GIF({
+          workers: 2,
+          quality: 10,
+          width: width,
+          height: height,
+          workerScript: 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
+        });
+
+        // Add each frame
+        frames.forEach(frame => {
+          gif.addFrame(frame.imageData, { delay: frame.delay, copy: true });
+        });
+
+        gif.on('finished', (blob) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+
+        gif.on('error', reject);
+        gif.render();
+      });
+    }
+
+    /**
+     * Generate GIF from canvas (single frame fallback)
      */
     async function generateGIF(canvas) {
-      // For now, just return canvas data as PNG
-      // Full GIF generation requires gifenc library
       return canvas.toDataURL('image/png');
     }
 
     /**
      * Main execution pipeline
+     * Supports both single-frame and multi-frame sequences
      */
     async function execute(cmdStr) {
       try {
@@ -777,24 +872,69 @@
         const manifest = parseCommand(cmdStr);
         console.log('📝 Parsed:', manifest);
         
-        // 2. Emerge
+        // 2. Emerge base specification
         statusEl.textContent = '🌀 Emerging specification...';
         const spec = emerge(manifest);
         console.log('📋 Emerged:', spec);
         currentManifest = spec;
         
-        // 3. Render
-        statusEl.textContent = '🎨 Rendering...';
-        render(spec);
+        // Check if this is a multi-frame sequence
+        const isSequence = manifest.sequence && manifest.sequence.length > 1;
         
-        // 4. Generate GIF
-        statusEl.textContent = '📦 Generating GIF...';
-        gifData = await generateGIF(canvas);
-        
-        // Success
-        const bytes = Math.round(gifData.length * 0.75);
-        statusEl.className = 'status success';
-        statusEl.textContent = `✓ GIF ready! ${bytes.toLocaleString()} bytes, 1 frames`;
+        if (isSequence) {
+          // MULTI-FRAME SEQUENCE
+          statusEl.textContent = `🎬 Rendering ${manifest.sequence.length} frames...`;
+          
+          const frames = [];
+          const { dimensions } = spec;
+          
+          // Render each frame in sequence
+          for (let i = 0; i < manifest.sequence.length; i++) {
+            const frameText = manifest.sequence[i].replace(/\\n/g, '\n');
+            statusEl.textContent = `🎬 Rendering frame ${i + 1}/${manifest.sequence.length}: "${frameText.substring(0, 20)}..."`;
+            
+            const imageData = renderFrame(spec, frameText);
+            frames.push({
+              imageData: imageData,
+              delay: manifest.timing
+            });
+            
+            // Small delay to allow UI update
+            await new Promise(r => setTimeout(r, 50));
+          }
+          
+          // Show last frame in preview
+          renderFrame(spec, manifest.sequence[manifest.sequence.length - 1].replace(/\\n/g, '\n'));
+          
+          // Generate animated GIF
+          statusEl.textContent = '📦 Encoding animated GIF...';
+          try {
+            gifData = await generateAnimatedGIF(frames, dimensions.width, dimensions.height);
+            
+            const bytes = Math.round(gifData.length * 0.75);
+            const duration = (manifest.sequence.length * manifest.timing / 1000).toFixed(1);
+            statusEl.className = 'status success';
+            statusEl.textContent = `✓ Animated GIF ready! ${manifest.sequence.length} frames, ${duration}s duration`;
+          } catch (gifError) {
+            console.warn('GIF encoding failed, using PNG:', gifError);
+            gifData = canvas.toDataURL('image/png');
+            statusEl.className = 'status success';
+            statusEl.textContent = `✓ PNG ready (GIF encoding unavailable). ${manifest.sequence.length} frames designed.`;
+          }
+          
+        } else {
+          // SINGLE FRAME
+          statusEl.textContent = '🎨 Rendering...';
+          render(spec);
+          
+          // Generate single frame
+          statusEl.textContent = '📦 Generating image...';
+          gifData = await generateGIF(canvas);
+          
+          const bytes = Math.round(gifData.length * 0.75);
+          statusEl.className = 'status success';
+          statusEl.textContent = `✓ Image ready! ${bytes.toLocaleString()} bytes, 1 frame`;
+        }
         
       } catch (error) {
         console.error('Error:', error);
@@ -804,17 +944,21 @@
     }
 
     /**
-     * Download current GIF
+     * Download current GIF/PNG
      */
     function download() {
       if (!gifData) {
         statusEl.className = 'status error';
-        statusEl.textContent = '✗ No GIF to download. Render first!';
+        statusEl.textContent = '✗ No image to download. Render first!';
         return;
       }
       
+      // Detect file type from data URL
+      const isGif = gifData.startsWith('data:image/gif');
+      const ext = isGif ? 'gif' : 'png';
+      
       const link = document.createElement('a');
-      link.download = `dynamic-gif-${Date.now()}.png`;
+      link.download = `dynamic-gif-${Date.now()}.${ext}`;
       link.href = gifData;
       link.click();
     }
