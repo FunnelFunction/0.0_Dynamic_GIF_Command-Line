@@ -812,8 +812,9 @@
 
     /**
      * ============================================
-     * INLINE GIF ENCODER - No External Dependencies
+     * INLINE GIF ENCODER v2 - Unified Palette
      * Based on LZW compression for GIF89a format
+     * Builds palette from ALL frames for consistency
      * ============================================
      */
     
@@ -821,37 +822,51 @@
       constructor(width, height) {
         this.width = width;
         this.height = height;
-        this.frames = [];
+        this.rawFrames = []; // Store raw ImageData
+        this.delays = [];
         this.globalPalette = null;
+        this.paletteColors = null;
       }
       
-      // Quantize image to 256 colors using median cut
-      quantize(imageData) {
-        const pixels = imageData.data;
+      addFrame(imageData, delay) {
+        this.rawFrames.push(imageData);
+        this.delays.push(Math.round(delay / 10));
+      }
+      
+      // Build unified palette from ALL frames
+      buildGlobalPalette() {
         const colorCounts = new Map();
         
-        // Count color frequencies
-        for (let i = 0; i < pixels.length; i += 4) {
-          // Reduce color space to speed up
-          const r = pixels[i] & 0xF8;
-          const g = pixels[i + 1] & 0xF8;
-          const b = pixels[i + 2] & 0xF8;
-          const key = (r << 16) | (g << 8) | b;
-          colorCounts.set(key, (colorCounts.get(key) || 0) + 1);
+        // Collect colors from ALL frames
+        for (const imageData of this.rawFrames) {
+          const pixels = imageData.data;
+          for (let i = 0; i < pixels.length; i += 4) {
+            // Less aggressive reduction (6 bits instead of 5)
+            const r = pixels[i] & 0xFC;
+            const g = pixels[i + 1] & 0xFC;
+            const b = pixels[i + 2] & 0xFC;
+            const key = (r << 16) | (g << 8) | b;
+            colorCounts.set(key, (colorCounts.get(key) || 0) + 1);
+          }
         }
         
-        // Get top 256 colors
+        // Get top 256 colors across all frames
         const sortedColors = [...colorCounts.entries()]
           .sort((a, b) => b[1] - a[1])
           .slice(0, 256)
           .map(([color]) => color);
         
-        // Pad to 256 colors
+        // Pad to 256 colors with gradients for smoother fallback
         while (sortedColors.length < 256) {
-          sortedColors.push(0);
+          const idx = sortedColors.length;
+          // Fill with grayscale ramp
+          const gray = idx & 0xFC;
+          sortedColors.push((gray << 16) | (gray << 8) | gray);
         }
         
-        // Build palette
+        this.paletteColors = sortedColors;
+        
+        // Build palette bytes
         const palette = new Uint8Array(256 * 3);
         for (let i = 0; i < 256; i++) {
           const color = sortedColors[i];
@@ -860,32 +875,42 @@
           palette[i * 3 + 2] = color & 0xFF;
         }
         
-        // Build color lookup
-        const colorLookup = new Map();
-        sortedColors.forEach((color, index) => {
-          colorLookup.set(color, index);
-        });
+        this.globalPalette = palette;
         
-        // Map pixels to palette indices
+        // Build fast lookup
+        this.colorLookup = new Map();
+        sortedColors.forEach((color, index) => {
+          this.colorLookup.set(color, index);
+        });
+      }
+      
+      // Map frame pixels to palette indices
+      quantizeFrame(imageData) {
+        const pixels = imageData.data;
         const indices = new Uint8Array(this.width * this.height);
+        
         for (let i = 0, j = 0; i < pixels.length; i += 4, j++) {
-          const r = pixels[i] & 0xF8;
-          const g = pixels[i + 1] & 0xF8;
-          const b = pixels[i + 2] & 0xF8;
+          const r = pixels[i] & 0xFC;
+          const g = pixels[i + 1] & 0xFC;
+          const b = pixels[i + 2] & 0xFC;
           const key = (r << 16) | (g << 8) | b;
           
-          if (colorLookup.has(key)) {
-            indices[j] = colorLookup.get(key);
+          if (this.colorLookup.has(key)) {
+            indices[j] = this.colorLookup.get(key);
           } else {
-            // Find nearest color
+            // Find nearest color with fast approximation
             let minDist = Infinity;
             let nearest = 0;
-            for (let k = 0; k < sortedColors.length; k++) {
-              const pc = sortedColors[k];
+            
+            // Only check first 128 colors for speed (most common ones)
+            const checkCount = Math.min(128, this.paletteColors.length);
+            for (let k = 0; k < checkCount; k++) {
+              const pc = this.paletteColors[k];
               const pr = (pc >> 16) & 0xFF;
               const pg = (pc >> 8) & 0xFF;
               const pb = pc & 0xFF;
-              const dist = (r - pr) ** 2 + (g - pg) ** 2 + (b - pb) ** 2;
+              // Weighted distance (human eye more sensitive to green)
+              const dist = (r - pr) ** 2 * 2 + (g - pg) ** 2 * 4 + (b - pb) ** 2;
               if (dist < minDist) {
                 minDist = dist;
                 nearest = k;
@@ -895,7 +920,7 @@
           }
         }
         
-        return { palette, indices };
+        return indices;
       }
       
       // LZW encode
@@ -927,6 +952,12 @@
         };
         
         writeBits(clearCode, codeSize);
+        
+        if (indices.length === 0) {
+          writeBits(endCode, codeSize);
+          if (bitCount > 0) output.push(bits & 0xFF);
+          return new Uint8Array(output);
+        }
         
         let current = String.fromCharCode(indices[0]);
         
@@ -968,12 +999,10 @@
         return new Uint8Array(output);
       }
       
-      addFrame(imageData, delay) {
-        const { palette, indices } = this.quantize(imageData);
-        this.frames.push({ palette, indices, delay: Math.round(delay / 10) });
-      }
-      
       encode() {
+        // First, build unified palette from all frames
+        this.buildGlobalPalette();
+        
         const chunks = [];
         
         // GIF Header
@@ -985,13 +1014,13 @@
         lsd[1] = (this.width >> 8) & 0xFF;
         lsd[2] = this.height & 0xFF;
         lsd[3] = (this.height >> 8) & 0xFF;
-        lsd[4] = 0xF7; // Global color table, 256 colors
+        lsd[4] = 0xF7; // Global color table, 256 colors (2^(7+1))
         lsd[5] = 0; // Background color index
         lsd[6] = 0; // Pixel aspect ratio
         chunks.push(lsd);
         
-        // Global Color Table (from first frame)
-        chunks.push(this.frames[0].palette);
+        // Global Color Table
+        chunks.push(this.globalPalette);
         
         // Netscape extension for looping
         chunks.push(new Uint8Array([
@@ -1004,15 +1033,21 @@
         ]));
         
         // Add each frame
-        for (const frame of this.frames) {
+        for (let f = 0; f < this.rawFrames.length; f++) {
+          const imageData = this.rawFrames[f];
+          const delay = this.delays[f];
+          
+          // Quantize this frame using global palette
+          const indices = this.quantizeFrame(imageData);
+          
           // Graphic Control Extension
           const gce = new Uint8Array(8);
           gce[0] = 0x21; // Extension introducer
           gce[1] = 0xF9; // Graphic control label
           gce[2] = 0x04; // Block size
-          gce[3] = 0x00; // Packed byte (no transparency)
-          gce[4] = frame.delay & 0xFF;
-          gce[5] = (frame.delay >> 8) & 0xFF;
+          gce[3] = 0x00; // Packed byte (no transparency, no disposal)
+          gce[4] = delay & 0xFF;
+          gce[5] = (delay >> 8) & 0xFF;
           gce[6] = 0x00; // Transparent color index
           gce[7] = 0x00; // Block terminator
           chunks.push(gce);
@@ -1033,7 +1068,7 @@
           chunks.push(new Uint8Array([0x08]));
           
           // LZW Data
-          const lzwData = this.lzwEncode(frame.indices, 8);
+          const lzwData = this.lzwEncode(indices, 8);
           
           // Split into sub-blocks (max 255 bytes each)
           let offset = 0;
