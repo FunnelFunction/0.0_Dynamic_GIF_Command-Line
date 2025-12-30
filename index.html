@@ -631,47 +631,389 @@
      * Collapse Genesis Stack: Φ → ∇Φ → ∇×F → ∇²Φ → ρq
      */
 
-    // Color Palettes - Brand Attractors
+    /**
+     * ============================================
+     * COLOR PALETTES - Brand Attractor Fields
+     * 
+     * Each palette is a point in color space that
+     * defines the visual "gravity" of the design.
+     * 
+     * Organized by:
+     * - Primary Use Case
+     * - Emotional Resonance (Soul component)
+     * - Industry Standard
+     * ============================================
+     */
     const PALETTES = {
+      
+      // ===== CORE PALETTES =====
       oceanic: {
         gradient: ['#0066cc', '#00aacc', '#00ccaa'],
         text: '#ffffff',
-        name: 'Oceanic'
+        name: 'Oceanic',
+        use: 'Tech, SaaS, Trust'
       },
       sunset: {
         gradient: ['#ff6b35', '#f7931a', '#ffcc00'],
         text: '#ffffff',
-        name: 'Sunset'
+        name: 'Sunset',
+        use: 'Energy, Creativity, Warmth'
       },
       midnight: {
         gradient: ['#1a1a2e', '#16213e', '#0f3460'],
         text: '#e8e8f0',
-        name: 'Midnight'
+        name: 'Midnight',
+        use: 'Premium, Luxury, Tech'
       },
       forest: {
         gradient: ['#134e5e', '#1a8a5a', '#2ecc71'],
         text: '#ffffff',
-        name: 'Forest'
+        name: 'Forest',
+        use: 'Eco, Health, Growth'
       },
       purple: {
         gradient: ['#667eea', '#764ba2', '#f093fb'],
         text: '#ffffff',
-        name: 'Purple'
+        name: 'Purple',
+        use: 'Creative, Premium, Innovation'
       },
       minimal: {
         gradient: ['#ffffff', '#f8f9fa', '#e9ecef'],
         text: '#1a1a2e',
-        name: 'Minimal'
+        name: 'Minimal',
+        use: 'Clean, Professional, Modern'
       },
       corporate: {
         gradient: ['#2c3e50', '#3498db', '#2980b9'],
         text: '#ffffff',
-        name: 'Corporate'
+        name: 'Corporate',
+        use: 'Business, Enterprise, Trust'
       },
       neon: {
         gradient: ['#0a0a0f', '#1a1a2e', '#0a0a0f'],
         text: '#00ff88',
-        name: 'Neon'
+        name: 'Neon',
+        use: 'Gaming, Tech, Youth'
+      },
+      
+      // ===== PROFESSIONAL / INDUSTRY =====
+      finance: {
+        gradient: ['#1a3a4a', '#2d5a6a', '#1a4a3a'],
+        text: '#ffffff',
+        name: 'Finance',
+        use: 'Banking, Investment, Security'
+      },
+      healthcare: {
+        gradient: ['#00a8a8', '#00c9b8', '#40e0d0'],
+        text: '#ffffff',
+        name: 'Healthcare',
+        use: 'Medical, Wellness, Trust'
+      },
+      legal: {
+        gradient: ['#2c2c3e', '#3d3d5c', '#4a4a6a'],
+        text: '#d4af37',
+        name: 'Legal',
+        use: 'Law, Authority, Prestige'
+      },
+      realestate: {
+        gradient: ['#8b7355', '#a0826d', '#c9a959'],
+        text: '#ffffff',
+        name: 'Real Estate',
+        use: 'Property, Luxury, Home'
+      },
+      education: {
+        gradient: ['#2c5f8a', '#3d7ab8', '#5a9fd4'],
+        text: '#ffffff',
+        name: 'Education',
+        use: 'Learning, Academic, Knowledge'
+      },
+      consulting: {
+        gradient: ['#1a1a2e', '#2a2a4e', '#3a3a6e'],
+        text: '#ffffff',
+        name: 'Consulting',
+        use: 'Professional Services, B2B'
+      },
+      
+      // ===== TECH / STARTUP =====
+      techblue: {
+        gradient: ['#0077b6', '#00a8e8', '#00d4ff'],
+        text: '#ffffff',
+        name: 'Tech Blue',
+        use: 'SaaS, Cloud, Digital'
+      },
+      startup: {
+        gradient: ['#6366f1', '#8b5cf6', '#a855f7'],
+        text: '#ffffff',
+        name: 'Startup',
+        use: 'Innovation, Disruption, Modern'
+      },
+      cyber: {
+        gradient: ['#0d0d0d', '#1a1a2e', '#0d1117'],
+        text: '#00ff41',
+        name: 'Cyber',
+        use: 'Security, Hacking, Matrix'
+      },
+      ai: {
+        gradient: ['#1a0a2e', '#2d1b4e', '#4a2c7a'],
+        text: '#00d9ff',
+        name: 'AI',
+        use: 'Machine Learning, Future Tech'
+      },
+      blockchain: {
+        gradient: ['#0a1628', '#1a2d4a', '#2a4a6a'],
+        text: '#f7931a',
+        name: 'Blockchain',
+        use: 'Crypto, Web3, DeFi'
+      },
+      
+      // ===== WARM TONES =====
+      fire: {
+        gradient: ['#d32f2f', '#ff5722', '#ff9800'],
+        text: '#ffffff',
+        name: 'Fire',
+        use: 'Urgency, Energy, Action'
+      },
+      coral: {
+        gradient: ['#ff6b6b', '#ff8e8e', '#ffa8a8'],
+        text: '#ffffff',
+        name: 'Coral',
+        use: 'Friendly, Approachable, Warm'
+      },
+      autumn: {
+        gradient: ['#8b4513', '#cd853f', '#daa520'],
+        text: '#ffffff',
+        name: 'Autumn',
+        use: 'Seasonal, Harvest, Warm'
+      },
+      terracotta: {
+        gradient: ['#c65d3b', '#e07b5a', '#f4a582'],
+        text: '#ffffff',
+        name: 'Terracotta',
+        use: 'Earthy, Organic, Natural'
+      },
+      peach: {
+        gradient: ['#ffb5a7', '#fcd5ce', '#fec89a'],
+        text: '#3d3d3d',
+        name: 'Peach',
+        use: 'Soft, Beauty, Wellness'
+      },
+      
+      // ===== COOL TONES =====
+      ice: {
+        gradient: ['#a8dadc', '#e0fbfc', '#ffffff'],
+        text: '#1d3557',
+        name: 'Ice',
+        use: 'Clean, Fresh, Winter'
+      },
+      arctic: {
+        gradient: ['#2e4a62', '#4a7c9b', '#7fb3d5'],
+        text: '#ffffff',
+        name: 'Arctic',
+        use: 'Cold, Professional, Tech'
+      },
+      mint: {
+        gradient: ['#00b894', '#55efc4', '#81ecec'],
+        text: '#2d3436',
+        name: 'Mint',
+        use: 'Fresh, Clean, Health'
+      },
+      teal: {
+        gradient: ['#006d77', '#0a9396', '#94d2bd'],
+        text: '#ffffff',
+        name: 'Teal',
+        use: 'Medical, Professional, Calm'
+      },
+      slate: {
+        gradient: ['#475569', '#64748b', '#94a3b8'],
+        text: '#ffffff',
+        name: 'Slate',
+        use: 'Neutral, Business, Modern'
+      },
+      
+      // ===== DARK THEMES =====
+      charcoal: {
+        gradient: ['#1a1a1a', '#2d2d2d', '#404040'],
+        text: '#ffffff',
+        name: 'Charcoal',
+        use: 'Dark Mode, Elegant, Premium'
+      },
+      noir: {
+        gradient: ['#0d0d0d', '#1a1a1a', '#262626'],
+        text: '#f5f5f5',
+        name: 'Noir',
+        use: 'Luxury, Film, Dramatic'
+      },
+      obsidian: {
+        gradient: ['#0a0a0f', '#141420', '#1e1e30'],
+        text: '#ffffff',
+        name: 'Obsidian',
+        use: 'Gaming, Tech, Premium'
+      },
+      darkpurple: {
+        gradient: ['#1a0a2e', '#2d1248', '#3d1a5c'],
+        text: '#e8b4f8',
+        name: 'Dark Purple',
+        use: 'Creative, Night, Mystery'
+      },
+      darkgreen: {
+        gradient: ['#0a1a0f', '#142820', '#1e3c2e'],
+        text: '#90ee90',
+        name: 'Dark Green',
+        use: 'Nature, Eco Dark, Matrix'
+      },
+      
+      // ===== LIGHT THEMES =====
+      cream: {
+        gradient: ['#fdfbf7', '#f8f4ec', '#f3efe4'],
+        text: '#3d3d3d',
+        name: 'Cream',
+        use: 'Elegant, Soft, Premium'
+      },
+      paper: {
+        gradient: ['#fefefe', '#f9f9f9', '#f4f4f4'],
+        text: '#2c2c2c',
+        name: 'Paper',
+        use: 'Clean, Minimal, Document'
+      },
+      sand: {
+        gradient: ['#f5e6d3', '#eddcca', '#e5d2c1'],
+        text: '#4a3728',
+        name: 'Sand',
+        use: 'Natural, Beach, Warm'
+      },
+      lavender: {
+        gradient: ['#e6e6fa', '#d8d8f6', '#c9c9f2'],
+        text: '#4a4a6a',
+        name: 'Lavender',
+        use: 'Calm, Spa, Soft'
+      },
+      blush: {
+        gradient: ['#fce4ec', '#f8bbd9', '#f48fb1'],
+        text: '#4a2040',
+        name: 'Blush',
+        use: 'Beauty, Fashion, Feminine'
+      },
+      
+      // ===== VIBRANT / BOLD =====
+      electric: {
+        gradient: ['#7400b8', '#6930c3', '#5e60ce'],
+        text: '#ffffff',
+        name: 'Electric',
+        use: 'Bold, Youth, Energy'
+      },
+      candy: {
+        gradient: ['#ff006e', '#fb5607', '#ffbe0b'],
+        text: '#ffffff',
+        name: 'Candy',
+        use: 'Fun, Youth, Playful'
+      },
+      rainbow: {
+        gradient: ['#ff0080', '#ff8c00', '#40e0d0'],
+        text: '#ffffff',
+        name: 'Rainbow',
+        use: 'Pride, Celebration, Joy'
+      },
+      neonpink: {
+        gradient: ['#1a0a1a', '#2d0a2d', '#0a0a1a'],
+        text: '#ff00ff',
+        name: 'Neon Pink',
+        use: 'Nightclub, Bold, Youth'
+      },
+      synthwave: {
+        gradient: ['#2b1055', '#7597de', '#ff00ff'],
+        text: '#00ffff',
+        name: 'Synthwave',
+        use: 'Retro, 80s, Gaming'
+      },
+      
+      // ===== EARTH TONES =====
+      earth: {
+        gradient: ['#5d4e37', '#8b7355', '#a09080'],
+        text: '#ffffff',
+        name: 'Earth',
+        use: 'Natural, Organic, Grounded'
+      },
+      moss: {
+        gradient: ['#3d5a3d', '#5a7a5a', '#7a9a7a'],
+        text: '#ffffff',
+        name: 'Moss',
+        use: 'Nature, Eco, Calm'
+      },
+      clay: {
+        gradient: ['#a0522d', '#cd853f', '#deb887'],
+        text: '#ffffff',
+        name: 'Clay',
+        use: 'Artisan, Craft, Natural'
+      },
+      olive: {
+        gradient: ['#556b2f', '#6b8e23', '#9acd32'],
+        text: '#ffffff',
+        name: 'Olive',
+        use: 'Military, Nature, Classic'
+      },
+      coffee: {
+        gradient: ['#3c2415', '#5c3d2e', '#8b6914'],
+        text: '#f5deb3',
+        name: 'Coffee',
+        use: 'Cafe, Warm, Comfort'
+      },
+      
+      // ===== METALLIC FEEL =====
+      gold: {
+        gradient: ['#b8860b', '#daa520', '#ffd700'],
+        text: '#1a1a1a',
+        name: 'Gold',
+        use: 'Luxury, Premium, Award'
+      },
+      silver: {
+        gradient: ['#708090', '#a9a9a9', '#c0c0c0'],
+        text: '#1a1a1a',
+        name: 'Silver',
+        use: 'Tech, Modern, Premium'
+      },
+      bronze: {
+        gradient: ['#8b4513', '#cd7f32', '#daa06d'],
+        text: '#ffffff',
+        name: 'Bronze',
+        use: 'Classic, Award, Warm'
+      },
+      rosegold: {
+        gradient: ['#b76e79', '#e8a0a0', '#f4c4c4'],
+        text: '#3d2a2a',
+        name: 'Rose Gold',
+        use: 'Beauty, Fashion, Luxury'
+      },
+      
+      // ===== SEASONAL =====
+      spring: {
+        gradient: ['#98d8c8', '#f7dc6f', '#f8b500'],
+        text: '#2c3e50',
+        name: 'Spring',
+        use: 'Fresh, Renewal, Growth'
+      },
+      summer: {
+        gradient: ['#00c9ff', '#92fe9d', '#f9f871'],
+        text: '#2c3e50',
+        name: 'Summer',
+        use: 'Bright, Vacation, Energy'
+      },
+      winter: {
+        gradient: ['#2c3e50', '#4ca1af', '#c4e0e5'],
+        text: '#ffffff',
+        name: 'Winter',
+        use: 'Cold, Holiday, Clean'
+      },
+      holiday: {
+        gradient: ['#c41e3a', '#228b22', '#c41e3a'],
+        text: '#ffd700',
+        name: 'Holiday',
+        use: 'Christmas, Festive, Celebration'
+      },
+      halloween: {
+        gradient: ['#1a0a0a', '#ff6600', '#8b008b'],
+        text: '#00ff00',
+        name: 'Halloween',
+        use: 'Spooky, October, Fun'
       }
     };
 
