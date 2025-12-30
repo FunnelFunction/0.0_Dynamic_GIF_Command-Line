@@ -1476,8 +1476,10 @@
         radius: 80,       // Circle radius for centered elements
         amplitude: 20,    // Wave amplitude
         wavelength: 100   // Wave period
-        backgroundColor: '#1a1a1a'
       };
+      
+      // Numeric parameters that need conversion
+      const numericParams = ['angle', 'angle2', 'spacing', 'opacity', 'thickness', 'radius', 'amplitude', 'wavelength', 'timing'];
       
       const parts = cmdStr.split('|');
       for (const part of parts) {
@@ -1493,6 +1495,9 @@
           manifest.decorations = value.split(',').map(s => s.trim());
         } else if (k === 'timing') {
           manifest.timing = value.endsWith('s') ? parseFloat(value) * 1000 : parseFloat(value);
+        } else if (numericParams.includes(k)) {
+          // Convert numeric scalars - THE UNFURLING BEGINS HERE
+          manifest[k] = parseFloat(value);
         } else if (manifest.hasOwnProperty(k)) {
           manifest[k] = value;
         }
