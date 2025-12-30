@@ -1,493 +1,802 @@
-# 🌀 DYNAMIC GIF COMMAND-LINE
+# Dynamic GIF Command-Line Engine
 
-### *Temporal Diffuser Lattice Matrix*
-### *Self-Resolving Visual Computation Engine*
+## A Visual Physics Engine Based on Intent Tensor Theory
 
-<p align="center">
-  <strong>Where Intent Becomes Image Through Mathematical Convergence</strong>
-</p>
+**Built by Armstrong Knight & Abdullah Khan | [FunnelFunction](https://funnelfunction.com)**
 
----
+**AI Collaboration:** Claude (Anthropic), ChatGPT (OpenAI), Grok (xAI), Gemini (Google)
 
-## 🤝 COLLABORATION
-
-**This project is a collaboration between human creativity and artificial intelligence.**
-
-Built by:
-- **Armstrong Knight** - Lead Architect, Intent Tensor Theory Creator
-- **Abdullah Khan** - Co-Founder, Business Architecture
-- **Claude** (Anthropic) - Mathematical formalization, code architecture
-- **ChatGPT** (OpenAI) - Research synthesis, documentation
-- **Grok** (xAI) - Edge case analysis, optimization
-- **Gemini** (Google) - Cross-validation, testing frameworks
-
-> *The actual predictive nature to understand how the next few should go based on the few examples given."* — Armstrong Knight
-
-This is not just a GIF tool. This is **Executable Physics** - mathematical frameworks that compile intent into visual reality.
+**Live Application:** [https://render-auto-gif.onrender.com](https://render-auto-gif.onrender.com)
 
 ---
 
-## 🔮 WHAT IS THIS?
+## Table of Contents
 
-**Dynamic GIF Command-Line** is a visual computation engine that resolves brand-consistent graphics through **mathematical convergence** rather than manual composition.
-
-Type a command. Get a production-ready visual. Mathematically guaranteed.
-
-### Traditional Approach:
-```
-User clicks 47 buttons → Manual composition → Hope it looks good → Export
-```
-
-### Dynamic GIF Command-Line:
-```
-#sequence=Consultations|Build Apps|Scale Fast|Profit
-#timing=2s
-#colorFlow=evolve
-
-System:
-  1. Parses intent (0.001s)
-  2. Constructs temporal manifold (0.002s)
-  3. Validates through FSM curvature tensor (0.003s)
-  4. Emerges full specification via fiber bundle (0.005s)
-  5. Converges to brand attractor through gradient flow (0.010s)
-  6. Generates multi-frame sequence (0.050s)
-  7. Exports production-ready GIF (0.100s)
-
-Total: ~0.17 seconds, brand-guaranteed, mathematically proven
-```
+1. [Overview](#overview)
+2. [The Mathematics](#the-mathematics)
+3. [Quick Start](#quick-start)
+4. [Command Syntax](#command-syntax)
+5. [Parameters Reference](#parameters-reference)
+6. [Color Palettes](#color-palettes)
+7. [Decorations System](#decorations-system)
+8. [Examples Library](#examples-library)
+9. [Architecture](#architecture)
+10. [License](#license)
 
 ---
 
-## 🧠 MATHEMATICAL FOUNDATION
+## Overview
 
-### Intent Tensor Theory (ITT)
+This is not a template-based GIF generator. It is a **visual physics engine** that projects mathematical structures into pixel space.
 
-This system is built on the **Intent Tensor Theory** coordinate system - a complete mathematical framework for recursive collapse geometry.
+Every decoration, every gradient, every animation is the result of mathematical field computation—not pre-drawn assets.
 
-**The Collapse Genesis Stack:**
+### Core Principle: Scalar Unfurling
+
+A single number contains infinite visual potential when projected through mathematical structure:
+
 ```
-Φ → ∇Φ → ∇×F → ∇²Φ → ρq
+INPUT:  angle = 45
+
+LEVEL 0: θ = 45 (scalar on ℝ)
+         ↓  × π/180
+LEVEL 1: θ_rad = 0.785398 (point on S¹)
+         ↓  trigonometric projection
+LEVEL 2: (cos 45°, sin 45°) = (0.707, 0.707) (direction vector)
+         ↓  parametric extension
+LEVEL 3: Line family p(t) = p₀ + t·(0.707, 0.707) (infinite lines)
+         ↓  rasterization
+LEVEL 4: ~50,000 pixel decisions
+
+OUTPUT: Visual field rendered to canvas
 ```
 
-Where:
-| Symbol | Operator | Visual Role |
-|--------|----------|-------------|
-| Φ | Scalar tension | Frame content potential |
-| ∇Φ | Collapse gradient | Transition direction |
-| ∇×F | Memory loop (curl) | Style consistency |
-| ∇²Φ | Curvature lock (Laplacian) | Brand convergence |
-| ρq | Boundary charge | Visual output |
-
-**The ICHTB (Inverse Cartesian + Heisenberg Tensor Box):**
-
-Each frame exists on a 6-fan recursive surface:
-
-| Fan (Δᵢ) | Operator | Collapse Function |
-|----------|----------|-------------------|
-| Δ₁ | ∇Φ | Push Vector (alignment) |
-| Δ₂ | ∇×F | Memory Loop (consistency) |
-| Δ₃ | +∇²Φ | Shell Expansion |
-| Δ₄ | -∇²Φ | Compression Lock |
-| Δ₅ | ∂Φ/∂t | Temporal Emergence |
-| Δ₆ | Φ = i₀ | Imaginary Scalar Root |
-
-When all 6 fans pass recursive alignment → **Visual structure emerges**.
-
-### References:
-- **[Intent Tensor Theory - Coordinate System](https://intent-tensor-theory.com/coordinate-system/)** - Complete mathematical specification
-- **[Executable Physics](https://github.com/Sensei-Intent-Tensor/0.0._Executable_Physics)** - Physics as computation
-- **[ITT Coding Principals](https://github.com/intent-tensor-theory/0.0_Coding_Principals_Intent_Tensor_Theory)** - Code implementation patterns
-- **[The Writables Doctrine](https://medium.com/@intent.tensor.theory/the-writables-doctrine-a3043a8a6ffa)** - Theoretical foundations
-- **[Ghostless Coding Architecture](https://medium.com/@intent.tensor.theory/ghostless-coding-architecture-e30465811d8b)** - Clean architecture principles
+**Expansion Ratio: 1 number → 50,000 pixels**
 
 ---
 
-## ⚡ QUICK START
+## The Mathematics
 
-### Installation
+### Intent Tensor Theory (ITT) Foundation
 
-```bash
-git clone https://github.com/FunnelFunction/0.0_Dynamic_GIF_Command-Line.git
-cd 0.0_Dynamic_GIF_Command-Line
-npm install
-npm run dev
+This engine implements the visual projection layer of Intent Tensor Theory:
+
+```
+Φ  →  ∇Φ  →  ∇×F  →  ∇²Φ
 ```
 
-### Your First GIF (Single Frame)
+| Operator | Visual Representation | Decoration Type |
+|----------|----------------------|-----------------|
+| **Φ** | Background field (ground state) | Solid color, gradient |
+| **∇Φ** | Gradient direction field | Diagonal lines, crosshatch |
+| **∇×F** | Curl / rotational patterns | Waves, rings, burst |
+| **∇²Φ** | Collapse points (Laplacian) | Corners, shapes, boundaries |
 
-```bash
-# Open browser: http://localhost:5173 (or your Render URL)
+### The Gating Function
 
-# In the command input:
-#text=Hello World|canvas=1:1|export=gif
+From the Marketing Principals framework:
 
-# Press Enter → Watch instant convergence → GIF appears
+```
+                    S · R · Π
+A_{u,m,t}(e) = ───────────────
+                  N + L + Θ
 ```
 
-### Your First Multi-Frame Sequence
+In this visual engine:
+- **S (Sensory)** = Color contrast, shape salience
+- **R (Relevance)** = Text content, semantic meaning  
+- **Π (Resonance)** = Brand alignment, identity match
+- **N (Noise)** = Visual clutter (we minimize this)
+- **Decorations** = Field structure that enhances S without adding N
 
-```bash
-#mode=multi
-#sequence=Consultations|Build Apps|Scale Fast|Profit
-#timing=2s
-#colorFlow=evolve
-#background=gradient::animate=slide
-#export=gif
+### Layer Composition (Z-Depth)
+
+```
+BACK ─────────────────────────────── FRONT
+
+┌─────────────────────────────────────────┐
+│ LAYER 0: Background (Φ₀ ground state)   │
+├─────────────────────────────────────────┤
+│ LAYER 1: Patterns (∇Φ field flows)      │
+│   grid, dots, diagonals, crosshatch     │
+├─────────────────────────────────────────┤
+│ LAYER 2: Filled shapes (|Φ| density)    │
+│   glow, circlesFilled, squaresFilled    │
+├─────────────────────────────────────────┤
+│ LAYER 3: Outlines (∇²Φ collapse points) │
+│   corners, circles, squares, rings      │
+├─────────────────────────────────────────┤
+│ LAYER 4: Text (Ψ offer vectors)         │
+│   header, subheader, content, footer    │
+├─────────────────────────────────────────┤
+│ LAYER 5: Navigation (feedback)          │
+│   navDots                               │
+└─────────────────────────────────────────┘
 ```
 
 ---
 
-## 🎬 FRAME MODES
+## Quick Start
 
-### Single Frame Mode (Default)
-```bash
-#mode=single
-#text=FunnelFunction|scene=corporate|export=png
+### Simple Text GIF
+
 ```
-Simple, instant, one-shot visual generation.
-
-### Multi-Frame Sequence Mode
-```bash
-#mode=multi
-#sequence=Frame 1|Frame 2|Frame 3|Frame 4
-#timing=2000        # 2 seconds per frame (ms)
-#colorFlow=evolve   # Colors shift across frames
-#loop=true          # GIF loops
-#export=gif
-```
-Animated sequence with full temporal manifold control.
-
----
-
-## 🎨 CLI SYNTAX REFERENCE
-
-### Basic Structure
-```
-#command1=value1|command2=value2|modifier::submod=value
+#text=Hello World
 ```
 
-### Frame Mode Commands
+### With Palette
 
-| Command | Values | Description |
-|---------|--------|-------------|
-| `mode` | `single`, `multi` | Frame generation mode |
-| `sequence` | `Text 1\|Text 2\|Text 3` | Multi-frame text sequence (pipe-separated) |
-| `timing` | `2000`, `2s`, `500ms` | Frame duration (global or per-frame) |
-| `frameCount` | `1-50` | Override frame count |
-| `loop` | `true`, `false` | GIF looping |
-
-### Color Flow Commands
-
-| Command | Values | Description |
-|---------|--------|-------------|
-| `colorFlow` | `consistent` | Same colors throughout (phase-locked) |
-| | `evolve` | Gradual color drift (gradient flow) |
-| | `pulse` | Oscillating colors (recursive resonance) |
-| | `random` | Stochastic within brand bounds |
-
-### Background Commands
-
-| Command | Values | Description |
-|---------|--------|-------------|
-| `background` | `gradient`, `solid`, `pinstripes` | Background type |
-| `::animate` | `static`, `slide`, `fade`, `morph` | Animation mode |
-| `::speed` | `0.5`, `1`, `2` | Animation speed multiplier |
-| `::direction` | `left`, `right`, `up`, `down` | Animation direction |
-
-### Shape Commands
-
-| Command | Values | Description |
-|---------|--------|-------------|
-| `shapes` | `circles`, `squares`, `triangles` | Shape overlay type |
-| `::fill` | `solid`, `gradient`, `outline` | Fill style |
-| `::count` | `1-20` | Number of shapes |
-| `::animate` | `true`, `false` | Shape animation |
-
-### Metadata Commands
-
-| Command | Description |
-|---------|-------------|
-| `company` | Company name for branding |
-| `ceo` | CEO/executive name |
-| `profile` | Brand profile to apply |
-
----
-
-## 📚 EXAMPLES
-
-### Corporate Announcement
-```bash
-#mode=multi
-#sequence=Q4 Results|Revenue Up 23%|Expanding Markets|2025 Outlook
-#timing=3s
-#colorFlow=consistent
-#profile=corporate
-#company=FunnelFunction
-#background=gradient::animate=fade
-#export=gif
+```
+#text=FunnelFunction|palette=oceanic
 ```
 
-### Product Feature Rotation
-```bash
-#mode=multi
-#sequence=Lead Generation|Email Automation|Smart Analytics|AI Insights
-#timing=2s
-#colorFlow=evolve
-#shapes=circles::fill=gradient::count=5::animate=true
-#export=gif
+### Multi-Frame Animation
+
+```
+sequence=Frame 1~Frame 2~Frame 3|palette=sunset|timing=2s
 ```
 
-### CEO Message
-```bash
-#mode=single
-#text=Vision 2025
-#profile=ceo/armstrong+funnel_function
-#scene=executive
-#animation=fadeIn
-#export=gif
-```
+### Zone-Based Professional Ad
 
-### Service Showcase
-```bash
-#mode=multi
-#sequence=Consultations|Development|Deployment|Support
-#timing=1.5s
-#background=pinstripes::animate=slide::direction=right
-#colorFlow=pulse
-#export=gif
+```
+header=CompanyName|subheader=Services|content=Service 1~Service 2~Service 3|footer=website.com|decorations=corners
 ```
 
 ---
 
-## 🔬 THE MATHEMATICS EXPLAINED
+## Command Syntax
 
-### Why This Works: Convergence Guarantee
-
-**Theorem (Convergence):**
-```
-∀ manifest m₀ ∈ M:
-  ∃ attractor m* ∈ B:
-    lim(t→∞) flow(m₀) = m*
-```
-*Every input converges to a brand-consistent output.*
-
-**Theorem (Collapse Prevention):**
-```
-∀ invalid manifest m:
-  ∃ escape path γ: m → ground_state
-```
-*The system never truly breaks - Morse theory guarantees recovery.*
-
-**Theorem (Emergence Dimensionality):**
-```
-dim(Fiber) - dim(Base) = Emergence Gain
-
-Example: 50 properties - 5 inputs = 45× amplification
-```
-*Simple commands expand into rich specifications.*
-
-### Temporal Manifold Dynamics
-
-Each multi-frame GIF is a **geodesic path** through visual manifold space:
+### Mode 1: Simple Text
 
 ```
-γ(t): [0,1] → V
+#text=Your Text Here|palette=name|canvas=ratio
 ```
 
-Where:
-- `t=0` is the first frame state
-- `t=1` is the final frame state
-- The path `γ` minimizes visual discontinuity (smooth brand transitions)
+### Mode 2: Multi-Frame Sequence
 
-The **collapse state** at each frame is computed as:
-```javascript
-{
-  phi: Math.sin(t * π * 2) * 0.5 + 0.5,           // Scalar tension
-  gradPhi: [cos(t * π * 2), sin(t * π * 2)],      // Collapse gradient
-  curlF: colorFlow === 'consistent' ? 1.0 : 0.5, // Memory loop
-  laplacianPhi: colorFlow === 'evolve' ? 0.3 + 0.7*(1-t) : 0.9,  // Curvature
-  rhoQ: 1.0,                                      // Boundary charge
-  entropy: colorFlow === 'random' ? 0.8 : 0.1,   // Phase stability
-}
+```
+sequence=Frame1~Frame2~Frame3|palette=name|timing=duration
+```
+
+### Mode 3: Zone-Based Layout
+
+```
+header=Title|subheader=Subtitle|content=Item1~Item2~Item3|footer=url|decorations=list
+```
+
+**Frame Separator:** Use `~` (tilde) to separate frames in sequences and content.
+
+---
+
+## Parameters Reference
+
+### Text Parameters
+
+| Parameter | Description | Example |
+|-----------|-------------|---------|
+| `text` | Single frame text | `text=Hello World` |
+| `sequence` | Multi-frame text (use `~`) | `sequence=One~Two~Three` |
+
+### Layout Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `canvas` | Aspect ratio | `1:1` |
+| `palette` | Color scheme | `oceanic` |
+| `timing` | Frame duration | `2s` |
+
+**Canvas Options:** `1:1`, `16:9`, `9:16`, `4:3`, `2:3`, `4:5`
+
+### Zone Layout Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `header` | Large title text | - |
+| `headerColor` | Header text color | `#ffffff` |
+| `subheader` | Subtitle text | - |
+| `subheaderColor` | Subheader color | `#00ff00` |
+| `content` | Animated content (use `~`) | - |
+| `tagline` | Fixed tagline below content | - |
+| `taglineColor` | Tagline color | `#cccccc` |
+| `footer` | Footer text (URL, etc.) | - |
+| `footerColor` | Footer color | `#888888` |
+| `background` | `solid` or `gradient` | `solid` |
+| `backgroundColor` | Solid background color | `#1a1a1a` |
+
+### Decoration Parameters (Scalar Unfurling)
+
+| Parameter | Description | Default | Unfurling |
+|-----------|-------------|---------|-----------|
+| `decorations` | Comma-separated list | `corners` | - |
+| `decorationColor` | Primary decoration color | `#00ff00` | - |
+| `angle` | Rotation for diagonals | `45` | θ → direction vector |
+| `angle2` | Second angle (crosshatch) | `135` | θ₂ → second field |
+| `spacing` | Distance between elements | `40` | Density of field |
+| `thickness` | Line weight | `2` | Field intensity |
+| `radius` | Circle/glow radius | `80` | Collapse zone size |
+| `amplitude` | Wave height | `20` | Oscillation magnitude |
+| `wavelength` | Wave period | `100` | k = 2π/λ |
+| `opacity` | Fill transparency | `0.3` | Field density alpha |
+
+---
+
+## Color Palettes
+
+### 50+ Professional Palettes
+
+#### Core Palettes
+
+| Name | Colors | Use Case |
+|------|--------|----------|
+| `oceanic` | Blue → Teal | Tech, SaaS, Trust |
+| `sunset` | Orange → Yellow | Energy, Creativity |
+| `midnight` | Dark Blue | Premium, Luxury |
+| `forest` | Teal → Green | Eco, Health, Growth |
+| `purple` | Purple → Pink | Creative, Innovation |
+| `minimal` | White → Gray | Clean, Modern |
+| `corporate` | Navy → Blue | Business, Enterprise |
+| `neon` | Black + Green text | Gaming, Tech |
+
+#### Professional / Industry
+
+| Name | Use Case |
+|------|----------|
+| `finance` | Banking, Investment |
+| `healthcare` | Medical, Wellness |
+| `legal` | Law, Authority |
+| `realestate` | Property, Luxury |
+| `education` | Learning, Academic |
+| `consulting` | Professional Services |
+
+#### Tech / Startup
+
+| Name | Use Case |
+|------|----------|
+| `techblue` | SaaS, Cloud |
+| `startup` | Innovation, Modern |
+| `cyber` | Security, Hacking |
+| `ai` | Machine Learning |
+| `blockchain` | Crypto, Web3 |
+
+#### Warm Tones
+
+| Name | Use Case |
+|------|----------|
+| `fire` | Urgency, Action |
+| `coral` | Friendly, Warm |
+| `autumn` | Seasonal, Harvest |
+| `terracotta` | Earthy, Natural |
+| `peach` | Soft, Beauty |
+
+#### Cool Tones
+
+| Name | Use Case |
+|------|----------|
+| `ice` | Clean, Fresh |
+| `arctic` | Cold, Professional |
+| `mint` | Fresh, Health |
+| `teal` | Medical, Calm |
+| `slate` | Neutral, Business |
+
+#### Dark Themes
+
+| Name | Use Case |
+|------|----------|
+| `charcoal` | Dark Mode, Elegant |
+| `noir` | Luxury, Dramatic |
+| `obsidian` | Gaming, Premium |
+| `darkpurple` | Creative, Mystery |
+| `darkgreen` | Nature, Matrix |
+
+#### Light Themes
+
+| Name | Use Case |
+|------|----------|
+| `cream` | Elegant, Premium |
+| `paper` | Clean, Document |
+| `sand` | Natural, Beach |
+| `lavender` | Calm, Spa |
+| `blush` | Beauty, Fashion |
+
+#### Vibrant / Bold
+
+| Name | Use Case |
+|------|----------|
+| `electric` | Bold, Energy |
+| `candy` | Fun, Playful |
+| `rainbow` | Pride, Joy |
+| `neonpink` | Nightclub, Youth |
+| `synthwave` | Retro, 80s |
+
+#### Earth Tones
+
+| Name | Use Case |
+|------|----------|
+| `earth` | Natural, Grounded |
+| `moss` | Nature, Calm |
+| `clay` | Artisan, Craft |
+| `olive` | Military, Classic |
+| `coffee` | Cafe, Comfort |
+
+#### Metallic Feel
+
+| Name | Use Case |
+|------|----------|
+| `gold` | Luxury, Award |
+| `silver` | Tech, Modern |
+| `bronze` | Classic, Warm |
+| `rosegold` | Beauty, Fashion |
+
+#### Seasonal
+
+| Name | Use Case |
+|------|----------|
+| `spring` | Fresh, Renewal |
+| `summer` | Bright, Vacation |
+| `winter` | Cold, Holiday |
+| `holiday` | Christmas, Festive |
+| `halloween` | Spooky, October |
+
+---
+
+## Decorations System
+
+### Mathematical Field Visualizations
+
+Each decoration represents a mathematical structure:
+
+| Decoration | Mathematical Basis | ITT Operator |
+|------------|-------------------|--------------|
+| `corners` | Boundary collapse at vertices | ∇²Φ |
+| `circles` | Radial level set r = const | \|x\| = r |
+| `squares` | L∞ metric boundary | max(\|x\|,\|y\|) = s |
+| `triangles` | 2-simplex tessellation | Simplex |
+| `diagonals` | Gradient direction field | ∇Φ |
+| `pinstripes` | Dense ∇Φ | ∇Φ (high freq) |
+| `crosshatch` | Superposition F₁ + F₂ | ∇Φ₁ + ∇Φ₂ |
+| `grid` | Cartesian basis (e₁, e₂) | x=c ∩ y=c |
+| `dots` | Discrete field sampling | Φ(lattice) |
+| `rings` | Concentric level sets | r ∈ {r₁,r₂,...} |
+| `burst` | Angular sector partition | θ = const |
+| `wave` | Sinusoidal oscillation | A·sin(kx) |
+| `glow` | Radial field intensity | \|Φ(r)\| |
+| `circlesFilled` | Field density region | ∫Φ dA |
+| `squaresFilled` | L∞ density region | ∫Φ dA |
+
+### Using Decorations
+
+```
+decorations=corners,circles,diagonals
+```
+
+Multiple decorations compose in layer order (patterns → shapes → outlines).
+
+---
+
+## Examples Library
+
+### 🔤 Simple Text Examples
+
+#### Hello World
+```
+#text=Hello World
+```
+
+#### With Palette
+```
+#text=Welcome|palette=sunset
+```
+
+#### With Scene
+```
+#text=Innovation|scene=gradient|palette=purple
+```
+
+#### Minimal Light
+```
+#text=Clean Design|palette=minimal
+```
+
+#### Neon Dark
+```
+#text=CYBER|palette=neon
+```
+
+#### Finance Theme
+```
+#text=Investment Solutions|palette=finance
+```
+
+#### Healthcare Theme
+```
+#text=Your Health Matters|palette=healthcare
+```
+
+#### AI Theme
+```
+#text=Machine Learning|palette=ai
 ```
 
 ---
 
-## 🏗️ ARCHITECTURE
+### 🎬 Multi-Frame Sequences
 
+#### Business Services
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    CLI INPUT                                │
-│   #mode=multi|sequence=A|B|C|timing=2s|colorFlow=evolve    │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-                           ↓ 1. Parse (cli/parser.js)
-┌─────────────────────────────────────────────────────────────┐
-│                 TEMPORAL MANIFOLD                           │
-│   { mode, frames, timing, colorFlow, collapseState }       │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-                           ↓ 2. Validate (core/validator.js)
-┌─────────────────────────────────────────────────────────────┐
-│              FSM CURVATURE TENSOR                           │
-│   E(manifest) = P₁ ∧ P₂ ∧ ... ∧ Pₙ                         │
-│   All predicates must hold for valid manifold              │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-                           ↓ 3. Emerge (core/emergence.js)
-┌─────────────────────────────────────────────────────────────┐
-│              FIBER BUNDLE PROJECTION                        │
-│   5 inputs → 50+ emergent properties per frame             │
-│   Brand profile expands to full specification              │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-                           ↓ 4. Generate Frame States (core/temporal-manifold.js)
-┌─────────────────────────────────────────────────────────────┐
-│              COLLAPSE STATE COMPUTATION                     │
-│   For each frame: Φ → ∇Φ → ∇×F → ∇²Φ → ρq                  │
-│   Color evolution, background interpolation, shape anim    │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-                           ↓ 5. Converge (core/convergence.js)
-┌─────────────────────────────────────────────────────────────┐
-│              GRADIENT FLOW DYNAMICS                         │
-│   dv/dt = -∇E(v)                                           │
-│   Each frame converges to brand attractor v*               │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-                           ↓ 6. Render (rendering/svg-generator.js)
-┌─────────────────────────────────────────────────────────────┐
-│              SVG/CANVAS GENERATION                          │
-│   Frame states → Visual elements                           │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-                           ↓ 7. Compose (rendering/gif-composer.js)
-┌─────────────────────────────────────────────────────────────┐
-│              MULTI-FRAME COMPOSITION                        │
-│   Frames + Timing → Animated GIF                           │
-│   Optimized encoding, proper frame delays                  │
-└─────────────────────────────────────────────────────────────┘
+sequence=Consultations~Build Apps~Scale Fast~Profit 💰|palette=oceanic|timing=2s
+```
+
+#### Quarterly Report
+```
+sequence=Q4 Results~Revenue Up 23%~Expanding Markets~2025 Outlook|palette=midnight|timing=3s
+```
+
+#### Product Launch
+```
+sequence=🚀 Launching Soon~New Features~Better UX~Coming January|palette=sunset|timing=1.5s
+```
+
+#### How It Works
+```
+sequence=Step 1: Sign Up~Step 2: Connect~Step 3: Launch~Step 4: Profit!|palette=forest|timing=2s
+```
+
+#### Stats Animation
+```
+sequence=10,000+~Leads Generated~Every Month~FunnelFunction|palette=oceanic|timing=1s
+```
+
+#### Brand Intro (Widescreen)
+```
+sequence=Hello~We Are~FunnelFunction~Let's Build Together|palette=purple|timing=1.5s|canvas=16:9
+```
+
+#### Countdown
+```
+sequence=3~2~1~GO!|palette=fire|timing=1s
+```
+
+#### Feature List
+```
+sequence=✓ Fast~✓ Secure~✓ Reliable~✓ Affordable|palette=techblue|timing=1.5s
+```
+
+#### Testimonial Rotation
+```
+sequence="Great product!" - John~"Highly recommend" - Sarah~"5 stars!" - Mike|palette=corporate|timing=3s
 ```
 
 ---
 
-## 🚀 DEPLOYMENT
+### 🏗️ Zone-Based Professional Ads
 
-### Live Instance
-**https://render-auto-gif.onrender.com**
+#### Corporate Services
+```
+header=FunnelFunction|subheader=Lead Generation|content=Email Automation~CRM Integration~Analytics Dashboard~Conversion Tracking|footer=funnelfunction.com|decorations=corners,squares|timing=2s
+```
 
-### Deploy Your Own
+#### Tech Company
+```
+header=TechCorp|subheader=Solutions|content=Web Development~Mobile Apps~Cloud Services~AI Integration|footer=techcorp.io|decorations=corners|subheaderColor=#00ff00|timing=1.5s
+```
 
-1. Fork this repository
-2. Connect to Render.com
-3. Set build command: `npm install && npm run build`
-4. Set publish directory: `dist`
-5. Deploy!
+#### Healthcare Provider
+```
+header=MedCare Plus|subheader=Your Health Partner|content=Primary Care~Specialists~Lab Services~Telehealth|tagline=Caring for You|footer=medcareplus.com|decorations=corners,circles|backgroundColor=#004d4d|subheaderColor=#40e0d0|timing=2s
+```
 
----
+#### E-Commerce Brand
+```
+header=ShopNow|subheader=Holiday Sale|content=50% Off Electronics~Free Shipping~Easy Returns~24/7 Support|footer=shopnow.com|decorations=corners|backgroundColor=#1a1a1a|subheaderColor=#ff6b35|timing=1.5s
+```
 
-## 🔮 ROADMAP
+#### AI Company (Gradient)
+```
+header=Future Tech|subheader=AI Automations|content=Machine Learning~Neural Networks~Computer Vision~NLP Solutions|tagline=We build tomorrow|footer=future.tech|background=gradient|palette=ai|decorations=corners,circles|timing=2s
+```
 
-### Phase 1: Core Lattice ✅
-- [x] Manifold geometry engine
-- [x] FSM validator
-- [x] Emergence system
-- [x] Convergence dynamics
-- [x] CLI parser
-- [x] Single-frame GIF export
+#### Startup Consulting
+```
+header=StartupName|subheader=Expert Consulting|content=Strategy~Development~Marketing~Growth|decorations=corners,pinstripes|backgroundColor=#1a1a3a|subheaderColor=#00d4ff|decorationColor=#7b61ff|timing=1.5s
+```
 
-### Phase 2: Temporal Manifold ✅
-- [x] Multi-frame sequence support
-- [x] Timing configuration
-- [x] Color flow modes
-- [x] Background animation
-- [x] Shape overlays
+#### Finance Services
+```
+header=Wealth Advisors|subheader=Investment Services|content=Portfolio Management~Tax Planning~Retirement~Estate Planning|footer=wealthadvisors.com|decorations=corners|backgroundColor=#1a3a4a|subheaderColor=#d4af37|timing=2.5s
+```
 
-### Phase 3: Intelligence Layer 🔄
-- [ ] Context engine (intent → params)
-- [ ] Layout AI (smart positioning)
-- [ ] Asset resolver (icon intelligence)
-- [ ] Profile gravity (brand field)
-- [ ] ARC-AGI style pattern prediction
+#### Law Firm
+```
+header=Smith & Partners|subheader=Attorneys at Law|content=Corporate~Litigation~IP~Real Estate|footer=smithpartners.law|decorations=corners|backgroundColor=#2c2c3e|subheaderColor=#d4af37|timing=2.5s
+```
 
-### Phase 4: Advanced Features 🔮
-- [ ] Physics particles
-- [ ] Video export (MP4, WebM)
-- [ ] Interactive SVG
-- [ ] Real-time collaboration
-- [ ] API endpoints
+#### Real Estate
+```
+header=Luxury Homes|subheader=Premium Properties|content=Waterfront~Downtown~Suburbs~Commercial|footer=luxuryhomes.com|decorations=corners|backgroundColor=#3d2b1f|subheaderColor=#c9a959|timing=2s
+```
 
----
+#### Education
+```
+header=Academy Pro|subheader=Online Learning|content=Courses~Certifications~Live Classes~Mentorship|tagline=Learn Without Limits|footer=academypro.edu|decorations=corners,grid|backgroundColor=#1a3a5a|subheaderColor=#5a9fd4|timing=2s
+```
 
-## 🌟 PHILOSOPHY
+#### Restaurant
+```
+header=Bella Cucina|subheader=Italian Restaurant|content=Pasta~Pizza~Seafood~Desserts|tagline=Authentic Italian Since 1985|footer=bellacucina.com|decorations=corners|background=gradient|palette=terracotta|timing=2s
+```
 
-This project embodies the belief that:
+#### Fitness
+```
+header=FitLife Gym|subheader=Transform Your Body|content=Personal Training~Group Classes~Nutrition~Recovery|footer=fitlifegym.com|decorations=corners,burst|backgroundColor=#1a1a1a|subheaderColor=#ff6b35|timing=1.5s
+```
 
-**Visual systems should be:**
-- Mathematically rigorous
-- Self-validating
-- Automatically consistent
-- Provably correct
-- Infinitely extensible
-
-**Intent should:**
-- Compile directly to form
-- Bypass manual iteration
-- Preserve semantic meaning
-- Honor brand constraints
-
-**AI collaboration should:**
-- Amplify human creativity
-- Ground theory in implementation
-- Bridge disciplines
-- Push boundaries together
+#### SaaS Product
+```
+header=CloudSync|subheader=Data Platform|content=Real-time Sync~API Access~Analytics~Integrations|tagline=Your data, everywhere|footer=cloudsync.io|decorations=corners,grid|backgroundColor=#0a1628|subheaderColor=#00d4ff|timing=2s
+```
 
 ---
 
-## 📜 LICENSE
+### 🔢 Scalar Unfurling - Mathematical Patterns
 
-MIT License - See [LICENSE](LICENSE)
+#### 30° Diagonal Lines
+```
+header=Gradient Co|subheader=∇Φ Fields|content=Linear Flow~Directional Force~Vector Space|decorations=corners,diagonals|angle=30|spacing=50|backgroundColor=#0a0a1a|decorationColor=#00ffaa|timing=2s
+```
+
+#### 60° Steep Diagonals
+```
+header=Steep|subheader=60 Degrees|content=Rising~Climbing~Peak|decorations=corners,diagonals|angle=60|spacing=40|backgroundColor=#1a0a1a|decorationColor=#ff6600|timing=2s
+```
+
+#### 75° Nearly Vertical
+```
+header=Vertical|subheader=75 Degrees|content=Up~Higher~Highest|decorations=corners,diagonals|angle=75|spacing=45|backgroundColor=#0a1a0a|decorationColor=#00ff00|timing=2s
+```
+
+#### Crosshatch 60°/120°
+```
+header=CrossField|subheader=Superposition|content=Wave 1~Wave 2~Interference|decorations=corners,crosshatch|angle=60|angle2=120|spacing=35|backgroundColor=#1a1a2e|decorationColor=#ff6b6b|timing=2s
+```
+
+#### Crosshatch 45°/135°
+```
+header=Diamond|subheader=Pattern|content=A~B~C|decorations=corners,crosshatch|angle=45|angle2=135|spacing=30|backgroundColor=#1a1a1a|decorationColor=#00ffff|timing=2s
+```
+
+#### Cartesian Grid
+```
+header=GridSpace|subheader=Cartesian Basis|content=e₁ Axis~e₂ Axis~Origin|decorations=corners,grid|spacing=30|backgroundColor=#0f0f1a|decorationColor=#4a9eff|timing=1.5s
+```
+
+#### Dense Grid
+```
+header=Dense|subheader=Grid|content=Fine~Detail~Matrix|decorations=corners,grid|spacing=15|backgroundColor=#0a0a0a|decorationColor=#333333|timing=2s
+```
+
+#### Concentric Rings
+```
+header=Radial|subheader=Level Sets|content=r = 40~r = 70~r = 100|decorations=corners,rings|backgroundColor=#1a0a1a|decorationColor=#ff00ff|timing=2s
+```
+
+#### Starburst Rays
+```
+header=Starburst|subheader=Ray Field|content=θ = 0°~θ = 30°~θ = 60°~θ = 90°|decorations=corners,burst|backgroundColor=#1a1a0a|decorationColor=#ffcc00|timing=1.5s
+```
+
+#### Sine Wave (Small)
+```
+header=Sine|subheader=Oscillation|content=Peak~Trough~Zero|decorations=corners,wave|amplitude=20|wavelength=60|backgroundColor=#0a1a1a|decorationColor=#00ffff|timing=2s
+```
+
+#### Sine Wave (Large)
+```
+header=Big Wave|subheader=High Amplitude|content=Crest~Valley~Crest|decorations=corners,wave|amplitude=40|wavelength=120|backgroundColor=#0a0a1a|decorationColor=#ff6b6b|timing=2s
+```
+
+#### Dot Lattice (Sparse)
+```
+header=Dots Array|subheader=Discrete Sampling|content=Point 1~Point 2~Point 3|decorations=corners,dots|spacing=40|backgroundColor=#1a1a1a|decorationColor=#88ff88|timing=1.5s
+```
+
+#### Dot Lattice (Dense)
+```
+header=Dense Dots|subheader=Fine Sampling|content=Many~More~Most|decorations=corners,dots|spacing=20|backgroundColor=#0a0a0a|decorationColor=#666666|timing=2s
+```
+
+#### Full Stack (All Layers)
+```
+header=Full Stack|subheader=Layer Composition|content=Background~Patterns~Shapes~Text|decorations=corners,diagonals,circles,squares|angle=45|spacing=60|backgroundColor=#0f0f2a|decorationColor=#00ff88|timing=2s
+```
+
+#### Maximum Complexity
+```
+header=Complex|subheader=All Decorations|content=Layer 1~Layer 2~Layer 3~Layer 4|decorations=corners,diagonals,circles,squares,grid|angle=30|spacing=50|backgroundColor=#0a0a1a|decorationColor=#ff00ff|timing=2s
+```
 
 ---
 
-## 🔗 CONNECTED PROJECTS
+### 🎨 Creative / Bold Examples
 
-- **[FunnelFunction](https://funnelfunction.com)** - B2B Lead Generation SaaS
-- **[Intent Tensor Theory](https://intent-tensor-theory.com)** - Mathematical foundations
-- **[Executable Physics](https://github.com/Sensei-Intent-Tensor/0.0._Executable_Physics)** - Physics as code
-- **[ITT Coding Principals](https://github.com/intent-tensor-theory/0.0_Coding_Principals_Intent_Tensor_Theory)** - Implementation patterns
-- **[FunnelFunction Marketing Principals](https://github.com/FunnelFunction/0.0_git_funnelfunction_marketing_Principals)** - Marketing mathematics
+#### Neon Nightclub
+```
+header=CLUB PULSE|subheader=Saturday Night|content=Live DJ~VIP Tables~Open Bar~Dance Floor|footer=clubpulse.com|decorations=corners,burst|backgroundColor=#0a0a0f|subheaderColor=#ff00ff|decorationColor=#00ffff|timing=1s
+```
+
+#### Gaming Tournament
+```
+header=GAME ON|subheader=Tournament|content=Battle Royale~Team Deathmatch~Capture Flag~Free For All|decorations=corners,crosshatch|backgroundColor=#0d0d0d|subheaderColor=#00ff41|decorationColor=#00ff41|timing=1s
+```
+
+#### Synthwave Retro
+```
+header=RETRO WAVE|subheader=80s Vibes|content=Neon Lights~Fast Cars~Sunset~Arcade|decorations=corners,diagonals|angle=75|backgroundColor=#2b1055|subheaderColor=#ff00ff|decorationColor=#00ffff|timing=1.5s
+```
+
+#### Pride / Celebration
+```
+header=CELEBRATE|subheader=Pride Month|content=Love~Unity~Equality~Joy|decorations=corners|background=gradient|palette=rainbow|timing=2s
+```
+
+#### Halloween Event
+```
+header=SPOOKY FEST|subheader=October 31|content=Costumes~Candy~Haunted House~Pumpkins|decorations=corners,burst|backgroundColor=#1a0a0a|subheaderColor=#ff6600|decorationColor=#8b008b|timing=1.5s
+```
+
+#### Holiday Sale
+```
+header=HOLIDAY SALE|subheader=50% OFF|content=Electronics~Fashion~Home~Toys|footer=shop.com|decorations=corners|background=gradient|palette=holiday|timing=1.5s
+```
+
+#### Black Friday
+```
+header=BLACK FRIDAY|subheader=MEGA DEALS|content=TVs 60% Off~Laptops 50% Off~Phones 40% Off~Free Shipping|decorations=corners|backgroundColor=#000000|subheaderColor=#ff0000|decorationColor=#ffffff|timing=1s
+```
+
+#### New Year
+```
+header=2025|subheader=Happy New Year|content=New Goals~New Dreams~New Beginnings~Let's Go!|decorations=corners,burst|backgroundColor=#0a0a1a|subheaderColor=#ffd700|decorationColor=#ffd700|timing=2s
+```
 
 ---
 
-## 💬 CONTACT
+### 📐 Aspect Ratio Examples
 
-**Armstrong Knight**
-- GitHub: [@FunnelFunction](https://github.com/FunnelFunction)
-- Project: [Dynamic GIF Command-Line](https://github.com/FunnelFunction/0.0_Dynamic_GIF_Command-Line)
-- Website: [funnelfunction.com](https://funnelfunction.com)
+#### Instagram Square (1:1)
+```
+header=Square|subheader=Instagram|content=Perfect for Feed|decorations=corners|canvas=1:1|timing=2s
+```
+
+#### YouTube Thumbnail (16:9)
+```
+header=Widescreen|subheader=YouTube|content=Great for Thumbnails|decorations=corners|canvas=16:9|timing=2s
+```
+
+#### Instagram Story (9:16)
+```
+header=Story|subheader=Instagram|content=Vertical Format|decorations=corners|canvas=9:16|timing=2s
+```
+
+#### Portrait Ad (4:5)
+```
+header=Portrait|subheader=Facebook Ad|content=Standard Ad Size|decorations=corners|canvas=4:5|timing=2s
+```
+
+#### Classic Video (4:3)
+```
+header=Classic|subheader=4:3 Ratio|content=Traditional Format|decorations=corners|canvas=4:3|timing=2s
+```
 
 ---
 
-<p align="center">
-  <strong>Dynamic GIF Command-Line</strong><br>
-  <em>Where mathematics meets design. Where intent becomes reality.</em><br>
-  <em>Command-line diffusion for the modern age.</em> 🚀
-</p>
+### 🎯 Industry-Specific Templates
+
+#### B2B SaaS
+```
+header=SaaSify|subheader=Enterprise Platform|content=Automation~Integration~Analytics~Security|tagline=Scale your business|footer=saasify.io|decorations=corners,grid|backgroundColor=#0a1628|subheaderColor=#00d4ff|spacing=35|timing=2s
+```
+
+#### Crypto/Web3
+```
+header=CryptoVault|subheader=DeFi Platform|content=Staking~Yield Farming~NFTs~Governance|footer=cryptovault.io|decorations=corners,diagonals|backgroundColor=#0a1628|subheaderColor=#f7931a|decorationColor=#f7931a|angle=60|timing=1.5s
+```
+
+#### E-Learning
+```
+header=LearnHub|subheader=Online Courses|content=Video Lessons~Quizzes~Certificates~Community|tagline=Learn at your pace|footer=learnhub.com|decorations=corners|backgroundColor=#1a3a5a|subheaderColor=#5a9fd4|timing=2s
+```
+
+#### Non-Profit
+```
+header=GiveHope|subheader=Making a Difference|content=Clean Water~Education~Healthcare~Food Security|tagline=Every donation counts|footer=givehope.org|decorations=corners,circles|backgroundColor=#134e5e|subheaderColor=#2ecc71|timing=2.5s
+```
+
+#### Event/Conference
+```
+header=TechCon 2025|subheader=Annual Conference|content=Keynotes~Workshops~Networking~Expo|tagline=January 15-17, San Francisco|footer=techcon2025.com|decorations=corners,burst|backgroundColor=#1a1a2e|subheaderColor=#667eea|timing=2s
+```
+
+#### Job Posting
+```
+header=We're Hiring|subheader=Join Our Team|content=Engineers~Designers~Marketers~Sales|tagline=Remote-friendly, great benefits|footer=careers.company.com|decorations=corners|background=gradient|palette=startup|timing=2s
+```
+
+#### Product Launch
+```
+header=Introducing|subheader=Product 2.0|content=Faster~Smarter~Better~Affordable|tagline=Available Now|footer=product.com|decorations=corners,rings|backgroundColor=#0a0a1a|subheaderColor=#ff6b35|timing=1.5s
+```
+
+#### Webinar Promo
+```
+header=Free Webinar|subheader=Marketing Mastery|content=Lead Generation~Email Strategy~Analytics~Q&A|tagline=Thursday, 2 PM EST|footer=Register at webinar.com|decorations=corners|backgroundColor=#2c3e50|subheaderColor=#3498db|timing=2s
+```
 
 ---
 
-**Built with:**
-- Svelte (reactivity)
-- JavaScript (execution)
-- Intent Tensor Theory (mathematics)
-- AI Collaboration (innovation)
-- Love (secret ingredient)
+## Architecture
 
-**Last Updated:** 2025-12-30  
-**Version:** 1.1.0  
-**Status:** Active Development
+### File Structure
+
+```
+index.html          # Complete application (single file)
+README.md           # This documentation
+```
+
+### Technology Stack
+
+- **Pure JavaScript** - No frameworks, no build step
+- **HTML5 Canvas** - Native rendering
+- **Inline GIF Encoder** - LZW compression, no external dependencies
+- **ITT Mathematics** - Scalar unfurling, field projection
+
+### Why Single File?
+
+Following the **Writables Doctrine** from Intent Tensor Theory:
+
+> "Code collapses when δ(Φ−Ψ) < ε"
+
+A single HTML file has:
+- **Zero dependencies** to break
+- **Zero build steps** to fail
+- **Instant deployment** to any static host
+- **Complete portability**
+
+The file IS the application. No assembly required.
 
 ---
 
-*"The next generation robots will run on this math. Not because we claimed it, but because we proved it works."*
+## Credits
+
+### Human Authors
+- **Armstrong Knight** - Architecture, ITT Mathematics
+- **Abdullah Khan** - Co-founder, Business Strategy
+
+### AI Collaborators
+- **Claude (Anthropic)** - Primary development, documentation
+- **ChatGPT (OpenAI)** - Ideation, testing
+- **Grok (xAI)** - Mathematical validation
+- **Gemini (Google)** - Research synthesis
+
+### Theoretical Foundation
+- [Intent Tensor Theory](https://intent-tensor-theory.com)
+- [FunnelFunction Marketing Principals](https://github.com/FunnelFunction/0.0_git_funnelfunction_marketing_Principals)
+- [The Writables Doctrine](https://medium.com/@intent.tensor.theory/the-writables-doctrine-a3043a8a6ffa)
+
+---
+
+## License
+
+MIT License - Free for commercial and personal use.
+
+---
+
+## Links
+
+- **Live App:** [https://render-auto-gif.onrender.com](https://render-auto-gif.onrender.com)
+- **GitHub:** [https://github.com/FunnelFunction/0.0_Dynamic_GIF_Command-Line](https://github.com/FunnelFunction/0.0_Dynamic_GIF_Command-Line)
+- **FunnelFunction:** [https://funnelfunction.com](https://funnelfunction.com)
+- **ITT Institute:** [https://intent-tensor-theory.com](https://intent-tensor-theory.com)
+
+---
+
+*Built with mathematics. Powered by intent. Collapsed into pixels.*
