@@ -9,7 +9,9 @@
  * where all emerged visuals freeze into the output artifact.
  */
 
-import { GIFEncoder, quantize, applyPalette } from 'gifenc';
+import * as gifenc from 'gifenc';
+
+const { GIFEncoder, quantize, applyPalette } = gifenc;
 
 /**
  * Encode frames to GIF
