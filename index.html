@@ -1,218 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Primary Meta Tags -->
-    <title>AUTO-GIF-CUSTOMER - Command-Line Visual Diffuser</title>
-    <meta name="title" content="AUTO-GIF-CUSTOMER - Command-Line Visual Diffuser" />
-    <meta name="description" content="Self-resolving visual computation engine. Create brand-consistent graphics through mathematical convergence." />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="AUTO-GIF-CUSTOMER" />
-    <meta property="og:description" content="Command-line diffuser lattice matrix for brand-consistent visual generation" />
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="AUTO-GIF-CUSTOMER" />
-    <meta property="twitter:description" content="Self-resolving visual computation engine" />
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-
-    <!-- Inline Critical CSS -->
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      :root {
-        /* Color System */
-        --color-bg-primary: #0a0a0f;
-        --color-bg-secondary: #13131a;
-        --color-bg-tertiary: #1a1a24;
-        --color-text-primary: #e8e8f0;
-        --color-text-secondary: #a0a0b8;
-        --color-text-tertiary: #70708c;
-        --color-accent-primary: #00d4ff;
-        --color-accent-secondary: #7b61ff;
-        --color-success: #00ff88;
-        --color-warning: #ffaa00;
-        --color-error: #ff3366;
-
-        /* Typography */
-        --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        --font-display: 'Montserrat', var(--font-sans);
-        --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-
-        /* Spacing */
-        --spacing-xs: 0.25rem;
-        --spacing-sm: 0.5rem;
-        --spacing-md: 1rem;
-        --spacing-lg: 1.5rem;
-        --spacing-xl: 2rem;
-        --spacing-2xl: 3rem;
-
-        /* Effects */
-        --blur-sm: 8px;
-        --blur-md: 16px;
-        --blur-lg: 24px;
-        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-        --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
-        --shadow-glow: 0 0 20px rgba(0, 212, 255, 0.3);
-
-        /* Transitions */
-        --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-        --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-        --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      html {
-        font-size: 16px;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: var(--font-sans);
-        background: var(--color-bg-primary);
-        color: var(--color-text-primary);
-        min-height: 100vh;
-        overflow-x: hidden;
-      }
-
-      #app {
-        min-height: 100vh;
-        width: 100%;
-        position: relative;
-      }
-
-      /* Loading State */
-      .app-loading {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: var(--color-bg-primary);
-        z-index: 9999;
-      }
-
-      .app-loading-spinner {
-        width: 48px;
-        height: 48px;
-        border: 3px solid var(--color-bg-tertiary);
-        border-top-color: var(--color-accent-primary);
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-      }
-
-      .app-loading-text {
-        margin-top: var(--spacing-lg);
-        font-family: var(--font-mono);
-        font-size: 0.875rem;
-        color: var(--color-text-secondary);
-        letter-spacing: 0.05em;
-      }
-
-      @keyframes spin {
-        to { transform: rotate(360deg); }
-      }
-
-      /* Gradient Background */
-      .gradient-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 0;
-        opacity: 0.4;
-        pointer-events: none;
-      }
-
-      .gradient-bg::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(
-          circle at 30% 50%,
-          rgba(0, 212, 255, 0.15) 0%,
-          transparent 50%
-        ),
-        radial-gradient(
-          circle at 70% 50%,
-          rgba(123, 97, 255, 0.15) 0%,
-          transparent 50%
-        );
-        animation: gradient-shift 20s ease-in-out infinite;
-      }
-
-      @keyframes gradient-shift {
-        0%, 100% { transform: translate(0, 0) rotate(0deg); }
-        50% { transform: translate(-10%, -10%) rotate(180deg); }
-      }
-
-      /* Scrollbar Styling */
-      ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: var(--color-bg-secondary);
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: var(--color-bg-tertiary);
-        border-radius: 4px;
-      }
-
-      ::-webkit-scrollbar-thumb:hover {
-        background: var(--color-accent-secondary);
-      }
-
-      /* Selection */
-      ::selection {
-        background: var(--color-accent-primary);
-        color: var(--color-bg-primary);
-      }
-    </style>
-  </head>
-
-  <body>
-    <!-- App Mount Point -->
-    <div id="app">
-      <!-- Loading State (replaced by Svelte on mount) -->
-      <div class="app-loading">
-        <div class="app-loading-spinner"></div>
-        <div class="app-loading-text">Initializing Lattice...</div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic GIF Command-Line</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #13131a;
+      --text-primary: #e8e8f0;
+      --text-secondary: #a0a0b8;
+      --accent-cyan: #00d4ff;
+      --accent-green: #00ff88;
+      --accent-red: #ff3366;
+      --font-mono: 'SF Mono', 'Fira Code', monospace;
+    }
+    
+    body {
+      font-family: var(--font-mono);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .header h1 {
+      font-size: 1.5rem;
+      color: var(--accent-cyan);
+      margin-bottom: 0.5rem;
+    }
+    
+    .header p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+    
+    .terminal {
+      width: 100%;
+      max-width: 800px;
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .terminal-header {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 1rem;
+    }
+    
+    .terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    
+    .terminal-dot.red { background: #ff5f56; }
+    .terminal-dot.yellow { background: #ffbd2e; }
+    .terminal-dot.green { background: #27ca40; }
+    
+    #command-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 1rem;
+      outline: none;
+    }
+    
+    #command-input::placeholder {
+      color: var(--text-secondary);
+    }
+    
+    .command-prefix {
+      color: var(--accent-cyan);
+      margin-right: 8px;
+    }
+    
+    .command-line {
+      display: flex;
+      align-items: center;
+    }
+    
+    .canvas-container {
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    #preview-canvas {
+      display: block;
+      max-width: 100%;
+      border-radius: 8px;
+    }
+    
+    .status {
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+    }
+    
+    .status.success {
+      background: rgba(0, 255, 136, 0.1);
+      border: 1px solid var(--accent-green);
+      color: var(--accent-green);
+    }
+    
+    .status.error {
+      background: rgba(255, 51, 102, 0.1);
+      border: 1px solid var(--accent-red);
+      color: var(--accent-red);
+    }
+    
+    .status.info {
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+    
+    .actions {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      border: none;
+      font-family: inherit;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn-primary {
+      background: var(--accent-cyan);
+      color: var(--bg-primary);
+    }
+    
+    .btn-primary:hover {
+      background: #00b8e0;
+    }
+    
+    .btn-secondary {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--text-secondary);
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--accent-cyan);
+    }
+    
+    .examples {
+      width: 100%;
+      max-width: 800px;
+      margin-top: 2rem;
+    }
+    
+    .examples h3 {
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    
+    .example-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .example-item {
+      background: var(--bg-secondary);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+    
+    .example-item:hover {
+      background: #1a1a24;
+      color: var(--accent-cyan);
+    }
+    
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>⚡ DYNAMIC GIF COMMAND-LINE</h1>
+    <p>URL → Manifest → Emergence → GIF</p>
+  </div>
+  
+  <div class="terminal">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+    </div>
+    <div class="command-line">
+      <span class="command-prefix">#</span>
+      <input 
+        type="text" 
+        id="command-input" 
+        placeholder="scene=corporate|text=Hello World|canvas=1:1|animate=fadeIn"
+        autocomplete="off"
+      >
+    </div>
+  </div>
+  
+  <div id="status-container"></div>
+  
+  <div class="canvas-container">
+    <canvas id="preview-canvas" width="400" height="400"></canvas>
+  </div>
+  
+  <div class="actions">
+    <button class="btn btn-primary" id="render-btn">Render GIF</button>
+    <button class="btn btn-secondary" id="download-btn" disabled>Download</button>
+  </div>
+  
+  <div class="examples">
+    <h3>Quick Examples</h3>
+    <div class="example-list">
+      <div class="example-item" data-cmd="scene=minimal|text=Hello World|canvas=1:1">
+        Minimal: Hello World
+      </div>
+      <div class="example-item" data-cmd="scene=corporate|text=Innovation|palette=future_tech|animate=pulse">
+        Corporate: Tech Style
+      </div>
+      <div class="example-item" data-cmd="scene=gradient|text=FunnelFunction|palette=oceanic|canvas=16:9">
+        Gradient: Ocean Theme
+      </div>
+      <div class="example-item" data-cmd="shape=circle|fill=#00d4ff|animate=grow|canvas=1:1">
+        Shape: Animated Circle
       </div>
     </div>
-
-    <!-- Gradient Background -->
-    <div class="gradient-bg"></div>
-
-    <!-- Main Application Entry -->
-    <script type="module" src="/src/main.js"></script>
-  </body>
+  </div>
+  
+  <script type="module" src="/src/main.js"></script>
+</body>
 </html>
